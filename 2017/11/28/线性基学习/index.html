@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="图论," />
+  <meta name="keywords" content="线性基," />
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="10.1-10.4总结显然，这四天是十一，最近过于疲惫的我请了3天的假，在家里好好休息了一番 （感觉在家休息也是做题学习啊） 10.5总结时隔多天再做模拟赛。。。然而也没有多少天，也就4天没做模拟赛而已。。。 今天交晚了，所以没成绩，不过我自己测了一下，应该是40分，尴尬。400分才做这么点分，实在有一点说不过去。 今天的t1看起来并没有那么难，事实证明我离正确答案已经很近了，但是并没有想到标答那">
-<meta name="keywords" content="图论">
+<meta name="description" content="本篇文章很多内容选自 先说明一点，$a_i$表示一个标量，而加粗的$a_i$表示一个向量，以便于区分。 概述基（basis）是线性代数中的一个概念，它是描述、刻画向量空间的基本工具。而在现行的OI题目中，通常利用基在异或空间中的一些特殊性质来解决题目，而这一类题目所涉及的知识点被称作$ \lceil$线性基$\rfloor$。 预备知识向量空间（vector space）定义$(F,V,+,•)$">
+<meta name="keywords" content="线性基">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2017.10.1-2017.10.8总结">
-<meta property="og:url" content="http://stevenzheng2002.top/2017/10/09/2017-10-1-2017-10-8总结/index.html">
+<meta property="og:title" content="线性基-学习">
+<meta property="og:url" content="http://stevenzheng2002.top/2017/11/28/线性基学习/index.html">
 <meta property="og:site_name" content="Steven&#39;s Blog">
-<meta property="og:description" content="10.1-10.4总结显然，这四天是十一，最近过于疲惫的我请了3天的假，在家里好好休息了一番 （感觉在家休息也是做题学习啊） 10.5总结时隔多天再做模拟赛。。。然而也没有多少天，也就4天没做模拟赛而已。。。 今天交晚了，所以没成绩，不过我自己测了一下，应该是40分，尴尬。400分才做这么点分，实在有一点说不过去。 今天的t1看起来并没有那么难，事实证明我离正确答案已经很近了，但是并没有想到标答那">
+<meta property="og:description" content="本篇文章很多内容选自 先说明一点，$a_i$表示一个标量，而加粗的$a_i$表示一个向量，以便于区分。 概述基（basis）是线性代数中的一个概念，它是描述、刻画向量空间的基本工具。而在现行的OI题目中，通常利用基在异或空间中的一些特殊性质来解决题目，而这一类题目所涉及的知识点被称作$ \lceil$线性基$\rfloor$。 预备知识向量空间（vector space）定义$(F,V,+,•)$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-27T13:36:02.651Z">
+<meta property="og:updated_time" content="2017-11-28T15:13:00.714Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2017.10.1-2017.10.8总结">
-<meta name="twitter:description" content="10.1-10.4总结显然，这四天是十一，最近过于疲惫的我请了3天的假，在家里好好休息了一番 （感觉在家休息也是做题学习啊） 10.5总结时隔多天再做模拟赛。。。然而也没有多少天，也就4天没做模拟赛而已。。。 今天交晚了，所以没成绩，不过我自己测了一下，应该是40分，尴尬。400分才做这么点分，实在有一点说不过去。 今天的t1看起来并没有那么难，事实证明我离正确答案已经很近了，但是并没有想到标答那">
+<meta name="twitter:title" content="线性基-学习">
+<meta name="twitter:description" content="本篇文章很多内容选自 先说明一点，$a_i$表示一个标量，而加粗的$a_i$表示一个向量，以便于区分。 概述基（basis）是线性代数中的一个概念，它是描述、刻画向量空间的基本工具。而在现行的OI题目中，通常利用基在异或空间中的一些特殊性质来解决题目，而这一类题目所涉及的知识点被称作$ \lceil$线性基$\rfloor$。 预备知识向量空间（vector space）定义$(F,V,+,•)$">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="http://stevenzheng2002.top/2017/10/09/2017-10-1-2017-10-8总结/"/>
+  <link rel="canonical" href="http://stevenzheng2002.top/2017/11/28/线性基学习/"/>
 
 
 
 
 
-  <title>2017.10.1-2017.10.8总结 | Steven's Blog</title>
+  <title>线性基-学习 | Steven's Blog</title>
   
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2017/10/09/2017-10-1-2017-10-8总结/">
+    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2017/11/28/线性基学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="stevenzheng2002">
@@ -334,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2017.10.1-2017.10.8总结</h1>
+          <h1 class="post-title" itemprop="name headline">线性基-学习</h1>
         
 
         <div class="post-meta">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T23:01:18+08:00">
-                2017-10-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T22:56:18+08:00">
+                2017-11-28
               </time>
             
 
@@ -369,8 +369,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/总结/" itemprop="url" rel="index">
-                    <span itemprop="name">总结</span>
+                  <a href="/categories/知识点/" itemprop="url" rel="index">
+                    <span itemprop="name">知识点</span>
                   </a>
                 </span>
 
@@ -380,8 +380,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/总结/心得与体会/" itemprop="url" rel="index">
-                    <span itemprop="name">心得与体会</span>
+                  <a href="/categories/知识点/讲解与实践/" itemprop="url" rel="index">
+                    <span itemprop="name">讲解与实践</span>
                   </a>
                 </span>
 
@@ -417,12 +417,41 @@
       
 
       
-        <h3 id="10-1-10-4总结"><a href="#10-1-10-4总结" class="headerlink" title="10.1-10.4总结"></a>10.1-10.4总结</h3><p>显然，这四天是十一，最近过于疲惫的我请了3天的假，<del>在家里好好休息了一番</del> （感觉在家休息也是做题学习啊）</p>
-<h3 id="10-5总结"><a href="#10-5总结" class="headerlink" title="10.5总结"></a>10.5总结</h3><p>时隔多天再做模拟赛。。。然而也没有多少天，也就4天没做模拟赛而已。。。</p>
-<p>今天交晚了，所以没成绩，不过我自己测了一下，应该是40分，尴尬。400分才做这么点分，实在有一点说不过去。</p>
-<p>今天的t1看起来并没有那么难，事实证明我离正确答案已经很近了，但是并没有想到标答那一步，导致我这道题只有20分的暴力分&amp;拖延了交卷时间。t2很显然，它的暴力可以拿到50分，然而zz一般的我竟然选择放弃这道题的暴力，去想t1和t4，真的不知道该说什么好了。t3最开始以为就是一个裸的线段树，然而它的数据范围到了$1e9$，这就比较gg了。t4就比较惨淡，最开始我还想着是不是个dp，然后写了半天没跳出来，只得放弃。</p>
-<p>因此，纵观今天的题与自己的分数，我觉得我的分数低主要是体现在<strong>实力不足</strong>上（咳咳，这貌似是每场都是低分的主要理由了吧），其次，还有很大一部分是<strong>分配时间以及心态上的问题</strong>，就比如t2本来还能拿个50分，却图正解然后正解没想出来，暴力也没打完。不过这一方面是我永远都改不掉的，这就比较gg。这几场比赛最开始都是在发愣，所以说上来先直截了当的打个暴力是坠吼的，然后拿到暴力分后再慢慢想（反正打暴力也花不了多少时间嘛）。题解见下。</p>
-<p>今天下午fsf讲了特（我）别（都）特（听）别（不）难（懂）的图论。到现在（17:00）我在实现了第一道例题。。。</p>
+        <p>本篇文章很多内容选自</p>
+<p>先说明一点，$a_i$表示一个标量，而加粗的<strong>$a_i$</strong>表示一个向量，以便于区分。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>基（basis）</strong>是线性代数中的一个概念，它是描述、刻画向量空间的基本工具。而在现行的OI题目中，通常利用基在异或空间中的一些特殊性质来解决题目，而这一类题目所涉及的知识点被称作$ \lceil$线性基$\rfloor$。</p>
+<h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="向量空间（vector-space）"><a href="#向量空间（vector-space）" class="headerlink" title="向量空间（vector space）"></a>向量空间（vector space）</h3><p>定义$(F,V,+,•)$为<strong>向量空间（vector space）</strong>，其中$F$为域，$V$为集合，$V$中元素称为向量，$+$为向量加法，$•$为标量乘法，且运算满足8条公理。</p>
+<h3 id="线性无关（linearly-independent）"><a href="#线性无关（linearly-independent）" class="headerlink" title="线性无关（linearly independent）"></a>线性无关（linearly independent）</h3><p>对于向量空间中 $V$ 上 $n$ 个元素的向量组 $(v_1, v_2,…,v_n)$，若存在不全为 $0$ 的数 $a_i\in F$，满足</p>
+<p>$a_1 v_1+a_2 v_2 + … + a_n v_n = 0$</p>
+<p>则称这 $n$ 个向量<strong>线性相关（linearly dependent）</strong>，否则称为<strong>线性无关（linearly independent）</strong>。</p>
+<h3 id="线性组合（linear-combination）"><a href="#线性组合（linear-combination）" class="headerlink" title="线性组合（linear combination）"></a>线性组合（linear combination）</h3><p>对于向量空间中 $V$ 上 $n$ 个元素的向量组$(v_1, v_2,..,v_n)$，其<strong>线性组合（linear combination）</strong>是如下形式的向量</p>
+<p>$a_1 v_1+a_2 v_2 + … + a_n v_n$</p>
+<p>其中 $a_1, …,a_n∈F$。</p>
+<p>一组向量线性无关⇔ 没有向量可用有限个其他向量的线性组合所表示</p>
+<h3 id="张成（span）"><a href="#张成（span）" class="headerlink" title="张成（span）"></a>张成（span）</h3><p>对于向量空间中 $V$ 上 $n$ 个元素的向量组$(v_1, v_2,..,v_n)$ ，其所有线性组合所构成的集合称为 $(v_1, v_2,..,v_n)$的<strong>张成（span）</strong>，记为$span(v_1, v_2,..,v_n)$。</p>
+<h3 id="基（basis）"><a href="#基（basis）" class="headerlink" title="基（basis）"></a>基（basis）</h3><p>若向量空间 $V$ 中向量组$B$既是线性无关的又可以张成 $V$，则称其为 $V$ 的<strong>基（basis）</strong>。</p>
+<p>$B$中的元素称为基向量。如果基中元素个数有限，就称向量空间为有限维向量空间，将元素的个数称作向量空间的维数。</p>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><p>设 $B$ 是向量空间 $V$ 的基。则 $B$ 具有以下性质：</p>
+<ol>
+<li><p>$V$ 是 $B$  的极小生成集，就是说只有 $B$ 能张成 $V$，而它的任何真子集都不张成全部的向量空间。</p>
+</li>
+<li><p>$B$ 是 $V$ 中线性无关向量的极大集合，就是说 $B$ 在 $V$ 中是线性无关集合，而且 $V$ 中没有其他线性无关集合包含它作为真子集。</p>
+</li>
+<li><p>$V$ 中所有的向量都可以按唯一的方式表达为 $B$ 中向量的线性组合。</p>
+<p>第三点尤其重要，感性的理解，基就是向量空间中的一个子集，它可以通过唯一的线性组合，来张成向量空间中所有的向量，这样就可以大大的缩小我们向量空间的大小。</p>
+</li>
+</ol>
+<h3 id="线性相关性引理（Linear-Dependent-Lemma）"><a href="#线性相关性引理（Linear-Dependent-Lemma）" class="headerlink" title="线性相关性引理（Linear Dependent Lemma）"></a>线性相关性引理（Linear Dependent Lemma）</h3><p>如果 $(v_1, v_2,..,v_n)$ 在 $V$ 中是线性相关的，并且 $v_1\not= 0$，则有至少一个 $j\in {2,…,m} $ 使得下列成立：</p>
+<ol>
+<li>$v<em>j\in span(v_1, v_2,..,v</em>{j-1})$</li>
+<li>如果从 $(v_1, v_2,..,v_n)$ 去掉第 $j$ 项，则剩余向量组的张成仍然等于 $span(v_1, v_2,..,v_n)$ 。</li>
+</ol>
+<p><strong>证明：</strong>设 $(v_1, v_2,..,v_n)$ 在 $V$ 中是线性相关的，并且 $v_1\not=0$，则有不全为 $0$ 的 $a_1,a_2,…,a_n\in F$，使得$a_1 v_1+…+a_m v_m=0$</p>
+<p>$a_2,a_3,…,a_n​$ 不会全为 $0​$（因为 $v_1\not=0​$）。设 $j​$ 是 $2,…,m​$ 中使得 $a_j\not=0​$ 的最大者，那么</p>
+<script type="math/tex; mode=display">v_j=-\frac{a_1}{a_j}v_1-...-\frac{a_{j-1}}{a_j}v_{j-1}</script><p>这就有 $(1)$ 成立。</p>
+<p>为了证明 $(2)$，设 $u\in span(v_1,…,v_n)$则存在 $c_1,…,c_n\in F$，使得</p>
+<p>$u=c_1 v_1+…+c_n v_n$</p>
+<p>在上面的等式中，可以用之前的等式右边来代替$v_j$。这样 $u$ 包含于从$(v_1, v_2,..,v_n)$ 去掉第 $j$ 项的张成，因而 $(2)$ 成立。</p>
 
       
     </div>
@@ -440,7 +469,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/图论/" rel="tag"># 图论</a>
+            <a href="/tags/线性基/" rel="tag"># 线性基</a>
           
         </div>
       
@@ -453,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/09/2017-9月总结/" rel="next" title="2017.9月总结">
-                <i class="fa fa-chevron-left"></i> 2017.9月总结
+              <a href="/2017/10/27/2017-10-27刷题总结/" rel="next" title="2017.10.27刷题总结">
+                <i class="fa fa-chevron-left"></i> 2017.10.27刷题总结
               </a>
             
           </div>
@@ -463,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/09/洛谷P1941-飞扬的小鸟-题解/" rel="prev" title="洛谷P1941 飞扬的小鸟 题解">
-                洛谷P1941 飞扬的小鸟 题解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/28/线性基题目练习/" rel="prev" title="线性基题目练习">
+                线性基题目练习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -621,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1-10-4总结"><span class="nav-number">1.</span> <span class="nav-text">10.1-10.4总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-5总结"><span class="nav-number">2.</span> <span class="nav-text">10.5总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识"><span class="nav-number">2.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#向量空间（vector-space）"><span class="nav-number">2.1.</span> <span class="nav-text">向量空间（vector space）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性无关（linearly-independent）"><span class="nav-number">2.2.</span> <span class="nav-text">线性无关（linearly independent）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性组合（linear-combination）"><span class="nav-number">2.3.</span> <span class="nav-text">线性组合（linear combination）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张成（span）"><span class="nav-number">2.4.</span> <span class="nav-text">张成（span）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基（basis）"><span class="nav-number">2.5.</span> <span class="nav-text">基（basis）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#性质"><span class="nav-number">2.5.1.</span> <span class="nav-text">性质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性相关性引理（Linear-Dependent-Lemma）"><span class="nav-number">2.6.</span> <span class="nav-text">线性相关性引理（Linear Dependent Lemma）</span></a></li></ol></li></ol></div>
             
 
           </div>
