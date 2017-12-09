@@ -45,8 +45,8 @@
 
 <script>
     (function(){
-        if('password'){
-            if (prompt('请输入文章密码') !== 'password'){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
                 alert('密码错误！');
                 history.back();
             }
@@ -134,19 +134,19 @@
 
 
 
-<meta name="description" content="今天学了一下splay，发现splay还是很强大的。  讲解与模板1早上先是看了看这篇博客（讲的真的是太好了！）传送门 模板：同时我也给一个我的模板（原题洛谷3369，打的十分丑陋）： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758">
+<meta name="description" content="今天学了一下splay，发现splay还是很强大的。 先安利几篇本蒟蒻认为好的讲解：讲解1 讲解2 讲解3 个人比较推荐好好看第三篇博客，主要我不用指针，所以这篇博客特别适合我，而且讲的也很细。 据一些dalao说，treap和SBT的功能都没有splay强，于是本蒟蒻就先学习了splay splay其实很好学，主要你要研究透它其中的原理，如果只被代码的话，我想意义不大，毕竟做题你还不会。 我学习">
 <meta name="keywords" content="平衡树,splay">
 <meta property="og:type" content="article">
 <meta property="og:title" content="平衡树学习">
 <meta property="og:url" content="http://stevenzheng2002.top/2017/12/02/平衡树学习/index.html">
 <meta property="og:site_name" content="Steven&#39;s Blog">
-<meta property="og:description" content="今天学了一下splay，发现splay还是很强大的。  讲解与模板1早上先是看了看这篇博客（讲的真的是太好了！）传送门 模板：同时我也给一个我的模板（原题洛谷3369，打的十分丑陋）： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758">
+<meta property="og:description" content="今天学了一下splay，发现splay还是很强大的。 先安利几篇本蒟蒻认为好的讲解：讲解1 讲解2 讲解3 个人比较推荐好好看第三篇博客，主要我不用指针，所以这篇博客特别适合我，而且讲的也很细。 据一些dalao说，treap和SBT的功能都没有splay强，于是本蒟蒻就先学习了splay splay其实很好学，主要你要研究透它其中的原理，如果只被代码的话，我想意义不大，毕竟做题你还不会。 我学习">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://stevenzheng2002.top/2017/12/02/平衡树学习/splay区间.png">
-<meta property="og:updated_time" content="2017-12-09T12:03:40.234Z">
+<meta property="og:updated_time" content="2017-12-09T12:19:23.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平衡树学习">
-<meta name="twitter:description" content="今天学了一下splay，发现splay还是很强大的。  讲解与模板1早上先是看了看这篇博客（讲的真的是太好了！）传送门 模板：同时我也给一个我的模板（原题洛谷3369，打的十分丑陋）： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758">
+<meta name="twitter:description" content="今天学了一下splay，发现splay还是很强大的。 先安利几篇本蒟蒻认为好的讲解：讲解1 讲解2 讲解3 个人比较推荐好好看第三篇博客，主要我不用指针，所以这篇博客特别适合我，而且讲的也很细。 据一些dalao说，treap和SBT的功能都没有splay强，于是本蒟蒻就先学习了splay splay其实很好学，主要你要研究透它其中的原理，如果只被代码的话，我想意义不大，毕竟做题你还不会。 我学习">
 <meta name="twitter:image" content="http://stevenzheng2002.top/2017/12/02/平衡树学习/splay区间.png">
 
 
@@ -433,6 +433,13 @@
 
       
         <p>今天学了一下splay，发现splay还是很强大的。</p>
+<p>先安利几篇本蒟蒻认为好的讲解：<a href="http://blog.csdn.net/skydec/article/details/20151805" target="_blank" rel="external">讲解1</a> <a href="http://blog.csdn.net/changtao381/article/details/8936765" target="_blank" rel="external">讲解2</a> <a href="http://blog.csdn.net/clove_unique/article/details/50630280" target="_blank" rel="external">讲解3</a></p>
+<p>个人比较推荐好好看第三篇博客，主要我不用指针，所以这篇博客特别适合我，而且讲的也很细。</p>
+<p>据一些dalao说，treap和SBT的功能都没有splay强，于是本蒟蒻就先学习了splay</p>
+<p>splay其实很好学，主要你要研究透它其中的原理，如果只被代码的话，我想意义不大，毕竟做题你还不会。</p>
+<p>我学习splay的时候也发现了一些问题，不够这些问题很多都早就有人提出来了，我也说一说比较主要的问题。例如：每次插入（或查询）完为什么要把当前节点旋转到最上面？</p>
+<p>呵呵，毕竟不要太较真，网上有一些dalao给出的答案是期望时间短，确实挺有道理。</p>
+<p>然后我们就来具体的看一下splay吧。</p>
 <hr>
 <h2 id="讲解与模板1"><a href="#讲解与模板1" class="headerlink" title="讲解与模板1"></a>讲解与模板1</h2><p>早上先是看了看这篇博客（讲的真的是太好了！）<a href="http://blog.csdn.net/clove_unique/article/details/50630280" target="_blank" rel="external">传送门</a></p>
 <h3 id="模板："><a href="#模板：" class="headerlink" title="模板："></a>模板：</h3><p>同时我也给一个我的模板（原题洛谷3369，打的十分丑陋）：</p>
