@@ -43,6 +43,17 @@
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
+<script>
+    (function(){
+        if('password'){
+            if (prompt('请输入文章密码') !== 'password'){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
 
 
   
@@ -132,7 +143,7 @@
 <meta property="og:description" content="今天学了一下splay，发现splay还是很强大的。  讲解与模板1早上先是看了看这篇博客（讲的真的是太好了！）传送门 模板：同时我也给一个我的模板（原题洛谷3369，打的十分丑陋）： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://stevenzheng2002.top/2017/12/02/平衡树学习/splay区间.png">
-<meta property="og:updated_time" content="2017-12-09T01:20:34.053Z">
+<meta property="og:updated_time" content="2017-12-09T01:35:50.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平衡树学习">
 <meta name="twitter:description" content="今天学了一下splay，发现splay还是很强大的。  讲解与模板1早上先是看了看这篇博客（讲的真的是太好了！）传送门 模板：同时我也给一个我的模板（原题洛谷3369，打的十分丑陋）： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758">
