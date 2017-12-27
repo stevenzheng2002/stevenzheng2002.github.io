@@ -45,8 +45,8 @@
 
 <script>
     (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
+        if('password'){
+            if (prompt('请输入文章密码') !== 'password'){
                 alert('密码错误！');
                 history.back();
             }
@@ -142,12 +142,12 @@
 <meta property="og:site_name" content="Steven&#39;s Blog">
 <meta property="og:description" content="网络流的建模确实不是很容易。但是通过这次刷题，我觉得网络流的建图都得基于以下两点： 1.我们想要（求）什么 2.我们需要保证什么条件 只要这个想清楚了，我觉得至少应付这24题应该是没什么问题（纯口hu）我当然不知道这24道题属于什么难度啦 题外话：貌似这里面掺杂了一些最短路、分层图之类的问题，然后我就没（不）有（会）做，所以这里面的总结当然不会是24道全的啦 loj有网络流24题系列，可以上loj">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://stevenzheng2002.top/2017/12/27/网络流24题总结/explanation%20(2">
-<meta property="og:updated_time" content="2017-12-27T13:20:36.117Z">
+<meta property="og:image" content="http://stevenzheng2002.top/2017/12/27/网络流24题总结/explanation.png">
+<meta property="og:updated_time" content="2017-12-27T13:40:20.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络流24题总结">
 <meta name="twitter:description" content="网络流的建模确实不是很容易。但是通过这次刷题，我觉得网络流的建图都得基于以下两点： 1.我们想要（求）什么 2.我们需要保证什么条件 只要这个想清楚了，我觉得至少应付这24题应该是没什么问题（纯口hu）我当然不知道这24道题属于什么难度啦 题外话：貌似这里面掺杂了一些最短路、分层图之类的问题，然后我就没（不）有（会）做，所以这里面的总结当然不会是24道全的啦 loj有网络流24题系列，可以上loj">
-<meta name="twitter:image" content="http://stevenzheng2002.top/2017/12/27/网络流24题总结/explanation%20(2">
+<meta name="twitter:image" content="http://stevenzheng2002.top/2017/12/27/网络流24题总结/explanation.png">
 
 
 
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  13,033
+                  13,032
                 </span>
               
 
@@ -622,7 +622,7 @@
 <p>这种的走格子的如果转化成上一题走边的话，你会发现有一些边加了很多次，所以这显然是错的。拆点做的话，便能很好的限制一条边被算了两次。</p>
 <p>如果我们把这道题改改，我们依然走格子，但是权值在边上呢？这时候，我能可以发现，我们把这个图转化成跟上一问差不多的图，是没有问题的，是不会有边算了2次的。</p>
 <p>如果没有懂得话，可以结合下面的图看一看。</p>
-<p><img src="/2017/12/27/网络流24题总结/explanation (2" alt="">.png)</p>
+<p><img src="/2017/12/27/网络流24题总结/explanation.png" alt="explanation"></p>
 <h1 id="19-骑士共存问题"><a href="#19-骑士共存问题" class="headerlink" title="19.骑士共存问题"></a>19.骑士共存问题</h1><h2 id="题意：-18"><a href="#题意：-18" class="headerlink" title="题意："></a>题意：</h2><p>在一个 $n\times n$ 个方格的国际象棋棋盘上，马（骑士）可以攻击的棋盘方格如图所示。棋盘上某些方格设置了障碍，骑士不得进入。</p>
 <p>对于给定的 n×n\text{n} \times \text{n}n×n 个方格的国际象棋棋盘和障碍标志，计算棋盘上最多可以放置多少个骑士，使得它们彼此互不攻击。</p>
 <h2 id="题解：-18"><a href="#题解：-18" class="headerlink" title="题解："></a>题解：</h2><p>这道题又是一个方格问题。首先我们要做的还是染色。染完色后我们发现两个能互相攻击的骑士颜色互不相同，然后有冲突的连边，算最大点独立集即可。</p>
