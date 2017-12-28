@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Steven&#39;s Blog">
 <meta property="og:description" content="刚学完网络流，正好看到了这个混合图求欧拉回路也是用网络流做，就学了学。 先推荐一篇blog，写的是真好：混合图求欧拉回路 我这篇也是从他那里转的。 算法目的：求混合图(有的边是单向，有的边是双向)的欧拉回路  预备知识： 1.无向图欧拉回路求法（其实就是dfs） 2.有向图欧拉回路球阀（其实就是无向图的dfs倒着输出） 3.网络流算法 大概思路： 1.先对所有无向边进行任意定向，即随机为他们确定一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-27T13:18:20.788Z">
+<meta property="og:updated_time" content="2017-12-28T12:50:18.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="混合图求欧拉回路">
 <meta name="twitter:description" content="刚学完网络流，正好看到了这个混合图求欧拉回路也是用网络流做，就学了学。 先推荐一篇blog，写的是真好：混合图求欧拉回路 我这篇也是从他那里转的。 算法目的：求混合图(有的边是单向，有的边是双向)的欧拉回路  预备知识： 1.无向图欧拉回路求法（其实就是dfs） 2.有向图欧拉回路球阀（其实就是无向图的dfs倒着输出） 3.网络流算法 大概思路： 1.先对所有无向边进行任意定向，即随机为他们确定一">
@@ -474,7 +474,7 @@
 <p>3.将所有入度&gt;出度的点向超级汇点连一条容量为$\frac{入度−出度}{2}$的边，超级源点向所有出度&gt;入度的点连一条容量为$\frac{出度−入度}{2}$的边，然后对于原图中所有的定向为(a,b)无向边连一条从a到b容量为1的边<br>4.跑网络流，如果正好能使所有从超级源点出来的边满流，则有解<br>5.把在网络流中那些因为原图无向边而建的流量为1的边中经过流量的边反向，就形成了一个能跑出欧拉回路的有向图，如果要求方案，用有向图求欧拉回路的方法求解即可 </p>
 <p><strong>算法解析：</strong></p>
 <p>第一步先定向没什么好说的。根据预备知识我们可以得到，只有当所有点的“入度=出度”时，这张图才能有欧拉回路。所以我们的目标是调整“无向边”的方向使得每个点的入度等于出度。<br>而考虑我们刚才所进行的网络流建图，从源到汇的一条增广路中经过的那些“原来是无向边而产生的边”，相当于把它们全部进行反向。这样造成的后果就是中间经过的那些点出度入度不变，只有一开始的点入度+1，出度-1、最后的点入度-1，出度+1.所以当源点到一个点的那条边满流时，就意味着这个点的出度已经等于入度了，自调整的过程已经完成。而当全部的点全部完成这一事件时，就说明已经能找到一条欧拉回路了。</p>
-
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28815250&auto=1&height=66"></iframe>
       
     </div>
     
@@ -494,7 +494,7 @@
   <p><span>本文标题:</span><a href="/2017/12/27/混合图求欧拉回路/">混合图求欧拉回路</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 stevenzheng2002 的个人博客">stevenzheng2002</a></p>
   <p><span>发布时间:</span>2017年12月27日 - 21:12</p>
-  <p><span>最后更新:</span>2017年12月27日 - 21:12</p>
+  <p><span>最后更新:</span>2017年12月28日 - 20:12</p>
   <p><span>原始链接:</span><a href="/2017/12/27/混合图求欧拉回路/" title="混合图求欧拉回路">http://stevenzheng2002.top/2017/12/27/混合图求欧拉回路/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://stevenzheng2002.top/2017/12/27/混合图求欧拉回路/"  aria-label="复制成功！"></i></span>
   </p>
