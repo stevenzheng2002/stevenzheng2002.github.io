@@ -1,88 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[近期总结]]></title>
-    <url>%2F2018%2F02%2F13%2F%E8%BF%91%E6%9C%9F%E6%80%BB%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[最近学了不少，也做了不少题，趁着假期，总结一下 首先，最近我觉得我的心态上的调整还是不错的，总之，比上学期，尤其NOIP那段好太多了。而且也确实比上学期更加努力了（感觉上学期有点松懈啊）。然后最近大概省选方面的大块的算法已经学的差不多了，接下来应该就是狂刷题、狂总结归纳的一个状态了，提高自己想题的速度以及拓宽解题思路。总之，一切进行的都还不错。 至于优点与优势，我好像并没有什么，实力还需加强，心态比较糟糕，留给我的时间也不多了。但是我觉得既然自己非常想搞好它，我就一定要努力（感觉出了决心也不剩些什么了），我觉得对于吃苦我已经做好了思想准备。 缺点和不足可能确实不少，解题能力还不够强（欠刷题，这个提升起来也不容易，先多做点题吧，尤其是刚学会没怎么做过题的算法），心态真的是每次考试都崩。然后学术方面的知识我应该还要补一补、学一学，比如数学之类的东西。 平时的交流圈，我感觉我好像跟别人交流的并不是很多，这点确实不是很好，尤其是我没有怎么和高手交流。对于现阶段，我可能跟cjr、lzy、hyh、cfz交流的多一点，以及一些学长（QQ）还有群之类的。接下来（下学期）开始我应该尽量的多跟高手讨论，请教一些问题，这样一定是有助于提升成绩以及拓宽眼界的。 接下来的日子还是努力冲刺吧，不能懈怠。最近学了不少，也做了不少题，趁着假期，总结一下 首先，最近我觉得我的心态上的调整还是不错的，总之，比上学期，尤其NOIP那段好太多了。而且也确实比上学期更加努力了（感觉上学期有点松懈啊）。然后最近大概省选方面的大块的算法已经学的差不多了，接下来应该就是狂刷题、狂总结归纳的一个状态了，提高自己想题的速度以及拓宽解题思路。总之，一切进行的都还不错。 至于优点与优势，我好像并没有什么，实力还需加强，心态比较糟糕，留给我的时间也不多了。但是我觉得既然自己非常想搞好它，我就一定要努力（感觉出了决心也不剩些什么了），我觉得对于吃苦我已经做好了思想准备。 缺点和不足可能确实不少，解题能力还不够强（欠刷题，这个提升起来也不容易，先多做点题吧，尤其是刚学会没怎么做过题的算法），心态真的是每次考试都崩。然后学术方面的知识我应该还要补一补、学一学，比如数学之类的东西。 平时的交流圈，我感觉我好像跟别人交流的并不是很多，这点确实不是很好，尤其是我没有怎么和高手交流。对于现阶段，我可能跟cjr、lzy、hyh、cfz交流的多一点，以及一些学长（QQ）还有群之类的。接下来（下学期）开始我应该尽量的多跟高手讨论，请教一些问题，这样一定是有助于提升成绩以及拓宽眼界的。 接下来的日子还是努力冲刺吧，不能懈怠。]]></content>
-      <categories>
-        <category>总结</category>
-        <category>心得与体会</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[bzoj1677 Sumsets 题解]]></title>
-    <url>%2F2018%2F02%2F13%2Fbzoj1677-Sumsets-%E9%A2%98%E8%A7%A3%2F</url>
-    <content type="text"><![CDATA[题意：给出一个N(1≤N≤10^6)，使用一些2的若干次幂的数相加来求之．问有多少种方法 题解：与完全背包类似，dp一下即可。 代码：123456789101112131415161718192021222324252627282930313233343536#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 1e6 + 15;const int MOD = 1e9;int f[MAXN], n, w[25] = &#123;0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288&#125;;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; n = read(); f[0] = 1; for(int i = 1; i &lt;= 20; i ++) for(int j = w[i]; j &lt;= n; j ++)&#123; (f[j] += f[j - w[i]]) %= MOD; &#125; printf("%d\n", f[n]);&#125;int main()&#123; work(); return 0;&#125;]]></content>
-      <categories>
-        <category>知识点</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-        <tag>完全背包</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[bzoj3390 Bad Cowtractors 题解]]></title>
-    <url>%2F2018%2F02%2F13%2Fbzoj3390-Bad-Cowtractors-%E9%A2%98%E8%A7%A3%2F</url>
-    <content type="text"><![CDATA[题意：奶牛贝茜被雇去建设N(2≤N≤1000)个牛棚间的互联网．她已经勘探出M(1≤M≤20000)条可建的线路，每条线路连接两个牛棚，而且会苞费C(1≤C≤100000)．农夫约翰吝啬得很，他希望建设费用最少甚至他都不想给贝茜工钱． 贝茜得知工钱要告吹，决定报复．她打算选择建一些线路，把所有牛棚连接在一起，让约翰花费最大．但是她不能造出环来，这样约翰就会发现． 题解：裸的最大生成树。 代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 1e3 + 15, MAXM = 2e4 + 15; int n, m, fa[MAXN];struct Edge&#123;int u, v, w;&#125;g[MAXM]; inline int find(int x)&#123;return fa[x] == x ? x : fa[x] = find(fa[x]);&#125;bool cmp(Edge x, Edge y)&#123;return x.w &gt; y.w;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; n = read(); m = read(); for(int i = 1; i &lt;= m; i ++)&#123; int u = read(), v = read(), w = read(); g[i] = (Edge)&#123;u, v, w&#125;; &#125; sort(g + 1, g + 1 + m, cmp); for(int i = 1; i &lt;= n; i ++) fa[i] = i; int cnt = 0; LL ans = 0; for(int i = 1; cnt != n - 1 &amp;&amp; i &lt;= m; i ++)&#123; int u = find(g[i].u), v = find(g[i].v); if(u != v)&#123; cnt ++; fa[u] = v; ans += g[i].w; &#125; &#125; if(cnt != n - 1) ans = -1; printf("%lld\n", ans); &#125;int main()&#123; work(); return 0;&#125;]]></content>
-      <categories>
-        <category>知识点</category>
-        <category>讲解</category>
-      </categories>
-      <tags>
-        <tag>最大生成树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[bzoj3392 Part Acquisition 题解]]></title>
-    <url>%2F2018%2F02%2F13%2Fbzoj3392-Part-Acquisition-%E9%A2%98%E8%A7%A3%2F</url>
-    <content type="text"><![CDATA[题意：奶牛们接到了寻找一种新型挤奶机的任务，为此它们准备依次经过N(1≤N≤50000)颗行星，在行星上进行交易．为了方便，奶牛们已经给可能出现的K(1≤K≤1000)种货物进行了由1到K的标号．由于这些行星都不是十分发达．没有流通的货币，所以在每个市场里都只能用固定的一种货物去换取另一种货物． 奶牛们带着一种上好的饲料从地球出发，希望进行最少的交易，最终得到所需要的机器．饲料的标号为1，所需要的机器的标号为K.如果任务无法完成，输出-1. 题解：裸的最短路 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 1e5 + 15;const int INF = 1e9 + 7;struct Edge&#123;int to, nxt;&#125;g[MAXN &lt;&lt; 1];int head[MAXN], cnt = 0, dist[MAXN], n, k;bool vis[MAXN]; queue &lt;int&gt; q;inline void add(int u, int v)&#123;g[++ cnt] = (Edge)&#123;v, head[u]&#125;; head[u] = cnt;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; n = read(), k = read(); for(int i = 1; i &lt;= n; i ++)&#123; int u = read(), v = read(); add(u, v); &#125; for(int i = 1; i &lt;= k; i ++) dist[i] = INF; dist[1] = 0; vis[1] = 1; q.push(1); while(!q.empty())&#123; int u = q.front(); q.pop(); vis[u] = 0; for(int i = head[u]; i; i = g[i].nxt)&#123; int v = g[i].to; if(dist[v] &gt; dist[u] + 1)&#123; dist[v] = dist[u] + 1; if(!vis[v])&#123;vis[v] = 1; q.push(v);&#125; &#125; &#125; &#125; if(dist[k] &gt; 1e8) printf("-1\n"); else printf("%d\n", dist[k] + 1);&#125;int main()&#123; work(); return 0;&#125;]]></content>
-      <categories>
-        <category>知识点</category>
-        <category>讲解</category>
-      </categories>
-      <tags>
-        <tag>最短路</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[bzoj1685 Allowance 题解]]></title>
-    <url>%2F2018%2F02%2F13%2Fbzoj1685-Allowance-%E9%A2%98%E8%A7%A3%2F</url>
-    <content type="text"><![CDATA[题意：作为对勤勤恳恳工作的贝茜的奖励，约翰已经决定开始支付贝茜一个小的每周津贴． 约翰有n(1≤N≤20)种币值的硬币，面值小的硬币总能整除面值较大的硬币．比如说，币值有如下几种：1美分，5美分，10美分，50美分. 利用给定的这些硬币，他将要每周至少付给贝茜一定金额的津贴C(1≤C≤10^8)． 请帮他计算出他最多能给贝茜发几周的津贴． 题解：考虑贪心，因为每种金币的面值都是成倍增长的，所以，我们对于面值&gt;=c的，直接给贝茜，&lt;c的呢，我们从小到大排序，从大到小渐渐补齐c，如果能补成==c，那么直接给她，如果不能补得那么整，我们就拿最小面值的给她补上。 代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 115;struct Node&#123;int v, b;&#125;a[MAXN];int n, c, l, r, ans = 0;bool cmp(Node x, Node y)&#123;return x.v &lt; y.v;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;bool pd()&#123; int s = 0; for(int i = r; i &gt;= l; i --)&#123; int tmp = min((c - s) / a[i].v, a[i].b); s += tmp * a[i].v; a[i].b -= tmp; if(s == c) return 1; &#125; while(!a[l].b &amp;&amp; l &lt;= r) l ++; while(!a[r].b &amp;&amp; l &lt;= r) r --; if(l &gt; r) return 0; while(s &lt; c)&#123; int tmp = min((c - s) / a[l].v + 1, a[l].b); s += tmp * a[l].v; a[l].b -= tmp; if(!a[l].b) l ++; if(l &gt; r) break; &#125; if(s &lt; c) return 0; return 1;&#125;void work()&#123; n = read(), c = read(); l = 1, r = n; for(int i = 1; i &lt;= n; i ++) a[i].v = read(), a[i].b = read(); sort(a + 1, a + n + 1, cmp); while(a[r].v &gt;= c &amp;&amp; l &lt;= r)&#123;ans += a[r].b; r --;&#125; while(pd()) ans ++; printf("%d\n", ans);&#125;int main()&#123; work(); return 0;&#125;]]></content>
-      <categories>
-        <category>知识点</category>
-        <category>讲解</category>
-      </categories>
-      <tags>
-        <tag>贪心</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[bzoj1652 usaco Treats for the Cows 题解]]></title>
-    <url>%2F2018%2F02%2F13%2Fbzoj1652-usaco-Treats-for-the-Cows-%E9%A2%98%E8%A7%A3%2F</url>
-    <content type="text"><![CDATA[题意：约翰经常给产奶量高的奶牛发特殊津贴，于是很快奶牛们拥有了大笔不知该怎么花的钱．为此，约翰购置了N(1≤N≤2000)份美味的零食来卖给奶牛们．每天约翰售出一份零食．当然约翰希望这些零食全部售出后能得到最大的收益．这些零食有以下这些有趣的特性： •零食按照1．．N编号，它们被排成一列放在一个很长的盒子里．盒子的两端都有开口，约翰每 天可以从盒子的任一端取出最外面的一个． •与美酒与好吃的奶酪相似，这些零食储存得越久就越好吃．当然，这样约翰就可以把它们卖出更高的价钱． •每份零食的初始价值不一定相同．约翰进货时，第i份零食的初始价值为Vi(1≤Vi≤1000)． •第i份零食如果在被买进后的第a天出售，则它的售价是vi×a． Vi的是从盒子顶端往下的第i份零食的初始价值．约翰告诉了你所有零食的初始价值，并希望你能帮他计算一下，在这些零食全被卖出后，他最多能得到多少钱． 题解：f[i]表示从i开始的最多能得的钱，我们枚举j，那么 $f_i=max(f[i]+a[i+j]\times (n-j), f[i+1]+a[i]\times (n-j))$ 代码：123456789101112131415161718192021222324252627282930313233343536373839#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 5e3 + 15;int f[MAXN], a[MAXN];inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; int n = read(); for(int i = 1; i &lt;= n; i ++) a[i] = read(), f[i] = a[i] * n; for(int j = 1; j &lt; n; j ++)&#123; for(int i = 1; i + j &lt;= n; i ++)&#123; int k = i + j; f[i] = max(f[i] + a[k] * (n - j), f[i + 1] + a[i] * (n - j)); &#125; //for(int i = 1; i + j; i ++) &#125; printf("%d\n", f[1]);&#125;int main()&#123; work(); return 0;&#125;]]></content>
-      <categories>
-        <category>知识点</category>
-        <category>讲解</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[bzoj1736 usaco The Wedding Juicer 题解]]></title>
-    <url>%2F2018%2F02%2F13%2Fbzoj1736-usaco-The-Wedding-Juicer-%E9%A2%98%E8%A7%A3%2F</url>
-    <content type="text"><![CDATA[题意：约翰的奶牛们找到了一份不错的兼职一设计冲压式榨汁机．榨汁机设计如下： 一个W * H的底座(3≤W,H≤300) 每一个1 *1的方格上都放有一个高度为B(1≤B≤109)的柱予，用来榨汁． 假设柱子之间都被完美地粘合了，这样水不会顺着柱子与柱子之间的空隙流走．但是约翰一直不知道，这么一个榨汁机，到底能装多少果汁？假设榨汁机周围没有任何东西，也就是说，边界上的水都会流走，有些榨汁机则根本不能装下任何的果汁． 题解：这个就是从最外围往里扫，然后如果当前扫到的格子周围有没有被扫过的且高度比当前格子低的话，可以对答案产生一定贡献，但是我们得保证扫到的格子，周围格子height&lt;当前格子的height中，其其他方向的三个格子都要&gt;=当前扫到的格子的height，所以用priority_queue瞎搞就完了。 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 515;struct Node&#123;int x, y, h; bool operator &lt; (const Node &amp;gg) const &#123;return h &gt; gg.h;&#125;&#125;;int a[MAXN][MAXN], vis[MAXN][MAXN], dx[15] = &#123;0, 1, 0, 0, -1&#125;, dy[15] = &#123;0, 0, 1, -1, 0&#125;, n, m;priority_queue &lt;Node&gt; q;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;LL getans()&#123; LL ans = 0; vis[1][1] = vis[1][m] = vis[n][1] = vis[n][m] = 1; for(int i = 2; i &lt; n; i ++) q.push((Node)&#123;i, 1, a[i][1]&#125;), q.push((Node)&#123;i, m, a[i][m]&#125;), vis[i][1] = vis[i][m] = 1; for(int i = 2; i &lt; m; i ++) q.push((Node)&#123;1, i, a[1][i]&#125;), q.push((Node)&#123;n, i, a[n][i]&#125;), vis[1][i] = vis[n][i] = 1; while(!q.empty())&#123; int x = q.top().x, y = q.top().y, h = q.top().h; q.pop(); for(int i = 1; i &lt;= 4; i ++)&#123; int x1 = x + dx[i], y1 = y + dy[i]; if(x1 &lt; 1 || x1 &gt; n || y1 &lt; 1 || y1 &gt; m || vis[x1][y1]) continue; vis[x1][y1] = 1; if(a[x1][y1] &lt; h)&#123; ans += (LL)h - a[x1][y1]; a[x1][y1] = h; &#125; q.push((Node)&#123;x1, y1, a[x1][y1]&#125;); &#125; &#125; return ans;&#125;void work()&#123; m = read(), n = read(); for(int i = 1; i &lt;= n; i ++) for(int j = 1; j &lt;= m; j ++) a[i][j] = read(); printf("%lld\n", getans());&#125;int main()&#123; work(); return 0;&#125;]]></content>
-      <categories>
-        <category>知识点</category>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>优先队列</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[bzoj3083 遥远的国度 题解]]></title>
     <url>%2F2018%2F02%2F08%2Fbzoj3083-%E9%81%A5%E8%BF%9C%E7%9A%84%E5%9B%BD%E5%BA%A6-%E9%A2%98%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[题意：题目描述zcwwzdjn在追杀十分sb的zhx，而zhx逃入了一个遥远的国度。当zcwwzdjn准备进入遥远的国度继续追杀时，守护神RapiD阻拦了zcwwzdjn的去路，他需要zcwwzdjn完成任务后才能进入遥远的国度继续追杀。 问题是这样的：遥远的国度有n个城市，这些城市之间由一些路连接且这些城市构成了一颗树。这个国度有一个首都，我们可以把这个首都看做整棵树的根，但遥远的国度比较奇怪，首都是随时有可能变为另外一个城市的。遥远的国度的每个城市有一个防御值，有些时候RapiD会使得某两个城市之间的路径上的所有城市的防御值都变为某个值。 RapiD想知道在某个时候，如果把首都看做整棵树的根的话，那么以某个城市为根的子树的所有城市的防御值最小是多少。 由于RapiD无法解决这个问题，所以他拦住了zcwwzdjn希望他能帮忙。但zcwwzdjn还要追杀sb的zhx，所以这个重大的问题就被转交到了你的手上。 输入输出格式输入格式： 第1行两个整数n m，代表城市个数和操作数。 第2行至第n行，每行两个整数 u v，代表城市u和城市v之间有一条路。 第n+1行，有n个整数，代表所有点的初始防御值。 第n+2行一个整数 id，代表初始的首都为id。 第n+3行至第n+m+2行，首先有一个整数opt，如果opt=1，接下来有一个整数id，代表把首都修改为id；如果opt=2，接下来有三个整数p1 p2 v，代表将p1 p2路径上的所有城市的防御值修改为v；如果opt=3，接下来有一个整数 id，代表询问以城市id为根的子树中的最小防御值。 输出格式： 对于每个opt=3的操作，输出一行代表对应子树的最小点权值。 输入输出样例输入样例#1： 1234567891011123 71 21 31 2 313 12 1 1 63 12 2 2 53 12 3 3 43 1 输出样例#1： 12341234 题解：先考虑没有换根操作，这时候就是裸的树剖。 如果有换根操作呢，分类讨论： 1.x == rt，这时候我们就是找1-n的最小值。 2.lca(x, rt) == x，即x在现根到原根的链上时，我们发现x的子树就是整棵树减去x向下一个节点的子树 3.除以上两种情况，x的子树不变。 然后套上裸的树链剖分就好了。 代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define INF 0x7fffffff#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1inline LL read()&#123; LL r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;const LL MAXN = 2e5 + 15;struct Edge&#123;LL to, nxt;&#125;g[MAXN &lt;&lt; 1];LL head[MAXN], size[MAXN], dep[MAXN], s[MAXN &lt;&lt; 2], fa[MAXN], son[MAXN], top[MAXN], f[MAXN][25], w[MAXN], col[MAXN], wt[MAXN], id[MAXN], cnt = 0, tt = 0, n;LL min(LL a, LL b)&#123;return a &gt; b ? b : a;&#125;void add(LL u, LL v)&#123;g[++ cnt] = (Edge)&#123;v, head[u]&#125;; head[u] = cnt;&#125;void add_edge(LL u, LL v)&#123;add(u, v); add(v, u);&#125;void up(LL o)&#123;s[o] = min(s[lson], s[rson]);&#125;void down(LL o, LL l, LL r)&#123;if(col[o])&#123;col[lson] = col[rson] = col[o]; s[lson] = s[rson] = col[o]; col[o] = 0;&#125;&#125;LL lca(LL x, LL y)&#123; if(dep[x] &lt; dep[y]) swap(x, y); LL t = dep[x] - dep[y]; for(LL i = 0; i &lt;= 17; i ++)&#123; if(t &amp; (1 &lt;&lt; i)) x = f[x][i]; &#125; for(LL i = 17; i &gt;= 0; i --)&#123; if(f[x][i] != f[y][i])&#123; x = f[x][i]; y = f[y][i]; &#125; &#125; if(x == y) return x; return f[x][0];&#125;void calc()&#123; for(LL j = 1; (1 &lt;&lt; j) &lt;= n; j ++) for(LL i = 1; i &lt;= n; i ++)&#123; if(f[i][j - 1]) f[i][j] = f[f[i][j - 1]][j - 1]; &#125;&#125;LL jump(LL x, LL dd)&#123; for(LL i = 0; i &lt;= 17; i ++)&#123; if(dd &amp; (1 &lt;&lt; i)) x = f[x][i]; &#125; return x;&#125;void build(LL o, LL l, LL r)&#123; if(l == r)&#123;s[o] = wt[l]; return ;&#125; LL mid = l + r &gt;&gt; 1; build(lson, l, mid); build(rson, mid + 1, r); up(o);&#125;void modify(LL o, LL l, LL r, LL x, LL y, LL c)&#123; if(x &lt;= l &amp;&amp; r &lt;= y)&#123;s[o] = col[o] = c; return ;&#125; LL mid = l + r &gt;&gt; 1; down(o, l, r); if(x &lt;= mid) modify(lson, l, mid, x, y, c); if(y &gt; mid) modify(rson, mid + 1, r, x, y, c); up(o);&#125;LL query(LL o, LL l, LL r, LL x, LL y)&#123; if(x &lt;= l &amp;&amp; r &lt;= y) return s[o]; LL mid = l + r &gt;&gt; 1, ret = INF; if(x &lt;= mid) ret = min(ret, query(lson, l, mid, x, y)); if(y &gt; mid) ret = min(ret, query(rson, mid + 1, r, x, y)); return ret;&#125;void dfs1(LL u, LL fafa, LL deep)&#123; size[u] = 1; f[u][0] = fa[u] = fafa; dep[u] = deep; for(LL i = head[u]; i; i = g[i].nxt)&#123; LL v = g[i].to; if(v == fafa) continue; dfs1(v, u, deep + 1); size[u] += size[v]; if(size[v] &gt; size[son[u]]) son[u] = v; &#125;&#125;void dfs2(LL u, LL topf)&#123; top[u] = topf; id[u] = ++ tt; wt[id[u]] = w[u]; if(son[u]) dfs2(son[u], topf); for(LL i = head[u]; i; i = g[i].nxt)&#123; LL v = g[i].to; if(v == son[u] || v == fa[u]) continue; dfs2(v, v); &#125;&#125;void change(LL x, LL y, LL c)&#123; while(top[x] != top[y])&#123; if(dep[top[x]] &lt; dep[top[y]]) swap(x, y); modify(1, 1, n, id[top[x]], id[x], c); x = fa[top[x]]; &#125; if(dep[x] &gt; dep[y]) swap(x, y); modify(1, 1, n, id[x], id[y], c);&#125;void work()&#123; n = read(); LL T = read(), rt; //memset(s, 0x3f, sizeof(s)); for(LL i = 1; i &lt; n; i ++)&#123; LL u = read(), v = read(); add_edge(u, v); &#125; for(LL i = 1; i &lt;= n; i ++) w[i] = read(); rt = read(); dfs1(1, 0, 1); dfs2(1, 1); build(1, 1, n); calc(); while(T --)&#123; LL opt = read(); if(opt == 1) rt = read(); else if(opt == 2)&#123; LL x = read(), y = read(), c = read(); change(x, y, c); &#125; else if(opt == 3)&#123; LL x = read(); if(x == rt) printf("%lld\n", query(1, 1, n, 1, n)); else if(lca(x, rt) == x)&#123; LL hh = jump(rt, dep[rt] - dep[x] - 1); printf("%lld\n", min(query(1, 1, n, 1, id[hh] - 1), query(1, 1, n, id[hh] + size[hh], n))); &#125; else printf("%lld\n", query(1, 1, n, id[x], id[x] + size[x] - 1)); &#125; &#125;&#125;int main()&#123; work(); return 0;&#125;]]></content>
@@ -91,8 +9,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>最近公共祖先</tag>
+        <tag>线段树</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -646,10 +564,10 @@
         <category>刷题总结</category>
       </categories>
       <tags>
-        <tag>数论</tag>
         <tag>图论</tag>
         <tag>最短路</tag>
         <tag>Tarjan</tag>
+        <tag>数论</tag>
         <tag>线段树</tag>
       </tags>
   </entry>
@@ -676,9 +594,9 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>最短路</tag>
         <tag>最小生成树</tag>
         <tag>最近公共祖先</tag>
+        <tag>最短路</tag>
       </tags>
   </entry>
   <entry>
