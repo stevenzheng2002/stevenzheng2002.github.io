@@ -23,6 +23,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[bzoj3392 Part Acquisition 题解]]></title>
+    <url>%2F2018%2F02%2F13%2Fbzoj3392-Part-Acquisition-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：奶牛们接到了寻找一种新型挤奶机的任务，为此它们准备依次经过N(1≤N≤50000)颗行星，在行星上进行交易．为了方便，奶牛们已经给可能出现的K(1≤K≤1000)种货物进行了由1到K的标号．由于这些行星都不是十分发达．没有流通的货币，所以在每个市场里都只能用固定的一种货物去换取另一种货物． 奶牛们带着一种上好的饲料从地球出发，希望进行最少的交易，最终得到所需要的机器．饲料的标号为1，所需要的机器的标号为K.如果任务无法完成，输出-1. 题解：裸的最短路 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 1e5 + 15;const int INF = 1e9 + 7;struct Edge&#123;int to, nxt;&#125;g[MAXN &lt;&lt; 1];int head[MAXN], cnt = 0, dist[MAXN], n, k;bool vis[MAXN]; queue &lt;int&gt; q;inline void add(int u, int v)&#123;g[++ cnt] = (Edge)&#123;v, head[u]&#125;; head[u] = cnt;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; n = read(), k = read(); for(int i = 1; i &lt;= n; i ++)&#123; int u = read(), v = read(); add(u, v); &#125; for(int i = 1; i &lt;= k; i ++) dist[i] = INF; dist[1] = 0; vis[1] = 1; q.push(1); while(!q.empty())&#123; int u = q.front(); q.pop(); vis[u] = 0; for(int i = head[u]; i; i = g[i].nxt)&#123; int v = g[i].to; if(dist[v] &gt; dist[u] + 1)&#123; dist[v] = dist[u] + 1; if(!vis[v])&#123;vis[v] = 1; q.push(v);&#125; &#125; &#125; &#125; if(dist[k] &gt; 1e8) printf("-1\n"); else printf("%d\n", dist[k] + 1);&#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>讲解</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bzoj1736 usaco The Wedding Juicer 题解]]></title>
     <url>%2F2018%2F02%2F13%2Fbzoj1736-usaco-The-Wedding-Juicer-%E9%A2%98%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[题意：约翰的奶牛们找到了一份不错的兼职一设计冲压式榨汁机．榨汁机设计如下： 一个W * H的底座(3≤W,H≤300) 每一个1 *1的方格上都放有一个高度为B(1≤B≤109)的柱予，用来榨汁． 假设柱子之间都被完美地粘合了，这样水不会顺着柱子与柱子之间的空隙流走．但是约翰一直不知道，这么一个榨汁机，到底能装多少果汁？假设榨汁机周围没有任何东西，也就是说，边界上的水都会流走，有些榨汁机则根本不能装下任何的果汁． 题解：这个就是从最外围往里扫，然后如果当前扫到的格子周围有没有被扫过的且高度比当前格子低的话，可以对答案产生一定贡献，但是我们得保证扫到的格子，周围格子height&lt;当前格子的height中，其其他方向的三个格子都要&gt;=当前扫到的格子的height，所以用priority_queue瞎搞就完了。 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 515;struct Node&#123;int x, y, h; bool operator &lt; (const Node &amp;gg) const &#123;return h &gt; gg.h;&#125;&#125;;int a[MAXN][MAXN], vis[MAXN][MAXN], dx[15] = &#123;0, 1, 0, 0, -1&#125;, dy[15] = &#123;0, 0, 1, -1, 0&#125;, n, m;priority_queue &lt;Node&gt; q;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;LL getans()&#123; LL ans = 0; vis[1][1] = vis[1][m] = vis[n][1] = vis[n][m] = 1; for(int i = 2; i &lt; n; i ++) q.push((Node)&#123;i, 1, a[i][1]&#125;), q.push((Node)&#123;i, m, a[i][m]&#125;), vis[i][1] = vis[i][m] = 1; for(int i = 2; i &lt; m; i ++) q.push((Node)&#123;1, i, a[1][i]&#125;), q.push((Node)&#123;n, i, a[n][i]&#125;), vis[1][i] = vis[n][i] = 1; while(!q.empty())&#123; int x = q.top().x, y = q.top().y, h = q.top().h; q.pop(); for(int i = 1; i &lt;= 4; i ++)&#123; int x1 = x + dx[i], y1 = y + dy[i]; if(x1 &lt; 1 || x1 &gt; n || y1 &lt; 1 || y1 &gt; m || vis[x1][y1]) continue; vis[x1][y1] = 1; if(a[x1][y1] &lt; h)&#123; ans += (LL)h - a[x1][y1]; a[x1][y1] = h; &#125; q.push((Node)&#123;x1, y1, a[x1][y1]&#125;); &#125; &#125; return ans;&#125;void work()&#123; m = read(), n = read(); for(int i = 1; i &lt;= n; i ++) for(int j = 1; j &lt;= m; j ++) a[i][j] = read(); printf("%lld\n", getans());&#125;int main()&#123; work(); return 0;&#125;]]></content>
@@ -599,9 +611,9 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>Tarjan</tag>
         <tag>最短路</tag>
         <tag>数论</tag>
+        <tag>Tarjan</tag>
         <tag>线段树</tag>
       </tags>
   </entry>
