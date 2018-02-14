@@ -23,6 +23,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[bzoj3390 Bad Cowtractors 题解]]></title>
+    <url>%2F2018%2F02%2F13%2Fbzoj3390-Bad-Cowtractors-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：奶牛贝茜被雇去建设N(2≤N≤1000)个牛棚间的互联网．她已经勘探出M(1≤M≤20000)条可建的线路，每条线路连接两个牛棚，而且会苞费C(1≤C≤100000)．农夫约翰吝啬得很，他希望建设费用最少甚至他都不想给贝茜工钱． 贝茜得知工钱要告吹，决定报复．她打算选择建一些线路，把所有牛棚连接在一起，让约翰花费最大．但是她不能造出环来，这样约翰就会发现． 题解：裸的最大生成树。 代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 1e3 + 15, MAXM = 2e4 + 15; int n, m, fa[MAXN];struct Edge&#123;int u, v, w;&#125;g[MAXM]; inline int find(int x)&#123;return fa[x] == x ? x : fa[x] = find(fa[x]);&#125;bool cmp(Edge x, Edge y)&#123;return x.w &gt; y.w;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; n = read(); m = read(); for(int i = 1; i &lt;= m; i ++)&#123; int u = read(), v = read(), w = read(); g[i] = (Edge)&#123;u, v, w&#125;; &#125; sort(g + 1, g + 1 + m, cmp); for(int i = 1; i &lt;= n; i ++) fa[i] = i; int cnt = 0; LL ans = 0; for(int i = 1; cnt != n - 1 &amp;&amp; i &lt;= m; i ++)&#123; int u = find(g[i].u), v = find(g[i].v); if(u != v)&#123; cnt ++; fa[u] = v; ans += g[i].w; &#125; &#125; if(cnt != n - 1) ans = -1; printf("%lld\n", ans); &#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>题解解</category>
+      </categories>
+      <tags>
+        <tag>最大生成树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bzoj3392 Part Acquisition 题解]]></title>
     <url>%2F2018%2F02%2F13%2Fbzoj3392-Part-Acquisition-%E9%A2%98%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[题意：奶牛们接到了寻找一种新型挤奶机的任务，为此它们准备依次经过N(1≤N≤50000)颗行星，在行星上进行交易．为了方便，奶牛们已经给可能出现的K(1≤K≤1000)种货物进行了由1到K的标号．由于这些行星都不是十分发达．没有流通的货币，所以在每个市场里都只能用固定的一种货物去换取另一种货物． 奶牛们带着一种上好的饲料从地球出发，希望进行最少的交易，最终得到所需要的机器．饲料的标号为1，所需要的机器的标号为K.如果任务无法完成，输出-1. 题解：裸的最短路 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 1e5 + 15;const int INF = 1e9 + 7;struct Edge&#123;int to, nxt;&#125;g[MAXN &lt;&lt; 1];int head[MAXN], cnt = 0, dist[MAXN], n, k;bool vis[MAXN]; queue &lt;int&gt; q;inline void add(int u, int v)&#123;g[++ cnt] = (Edge)&#123;v, head[u]&#125;; head[u] = cnt;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; n = read(), k = read(); for(int i = 1; i &lt;= n; i ++)&#123; int u = read(), v = read(); add(u, v); &#125; for(int i = 1; i &lt;= k; i ++) dist[i] = INF; dist[1] = 0; vis[1] = 1; q.push(1); while(!q.empty())&#123; int u = q.front(); q.pop(); vis[u] = 0; for(int i = head[u]; i; i = g[i].nxt)&#123; int v = g[i].to; if(dist[v] &gt; dist[u] + 1)&#123; dist[v] = dist[u] + 1; if(!vis[v])&#123;vis[v] = 1; q.push(v);&#125; &#125; &#125; &#125; if(dist[k] &gt; 1e8) printf("-1\n"); else printf("%d\n", dist[k] + 1);&#125;int main()&#123; work(); return 0;&#125;]]></content>
@@ -385,8 +397,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>树形dp</tag>
+        <tag>动态规划</tag>
         <tag>容斥原理</tag>
       </tags>
   </entry>
@@ -488,8 +500,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>递推</tag>
         <tag>KMP</tag>
+        <tag>递推</tag>
       </tags>
   </entry>
   <entry>
