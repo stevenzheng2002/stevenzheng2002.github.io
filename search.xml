@@ -35,6 +35,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[bzoj1652 usaco Treats for the Cows 题解]]></title>
+    <url>%2F2018%2F02%2F13%2Fbzoj1652-usaco-Treats-for-the-Cows-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：约翰经常给产奶量高的奶牛发特殊津贴，于是很快奶牛们拥有了大笔不知该怎么花的钱．为此，约翰购置了N(1≤N≤2000)份美味的零食来卖给奶牛们．每天约翰售出一份零食．当然约翰希望这些零食全部售出后能得到最大的收益．这些零食有以下这些有趣的特性： •零食按照1．．N编号，它们被排成一列放在一个很长的盒子里．盒子的两端都有开口，约翰每 天可以从盒子的任一端取出最外面的一个． •与美酒与好吃的奶酪相似，这些零食储存得越久就越好吃．当然，这样约翰就可以把它们卖出更高的价钱． •每份零食的初始价值不一定相同．约翰进货时，第i份零食的初始价值为Vi(1≤Vi≤1000)． •第i份零食如果在被买进后的第a天出售，则它的售价是vi×a． Vi的是从盒子顶端往下的第i份零食的初始价值．约翰告诉了你所有零食的初始价值，并希望你能帮他计算一下，在这些零食全被卖出后，他最多能得到多少钱． 题解：f[i]表示从i开始的最多能得的钱，我们枚举j，那么 $f_i=max(f[i]+a[i+j]\times (n-j), f[i+1]+a[i]\times (n-j))$ 代码：123456789101112131415161718192021222324252627282930313233343536373839#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 5e3 + 15;int f[MAXN], a[MAXN];inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; int n = read(); for(int i = 1; i &lt;= n; i ++) a[i] = read(), f[i] = a[i] * n; for(int j = 1; j &lt; n; j ++)&#123; for(int i = 1; i + j &lt;= n; i ++)&#123; int k = i + j; f[i] = max(f[i] + a[k] * (n - j), f[i + 1] + a[i] * (n - j)); &#125; //for(int i = 1; i + j; i ++) &#125; printf("%d\n", f[1]);&#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>讲解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bzoj1736 usaco The Wedding Juicer 题解]]></title>
     <url>%2F2018%2F02%2F13%2Fbzoj1736-usaco-The-Wedding-Juicer-%E9%A2%98%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[题意：约翰的奶牛们找到了一份不错的兼职一设计冲压式榨汁机．榨汁机设计如下： 一个W * H的底座(3≤W,H≤300) 每一个1 *1的方格上都放有一个高度为B(1≤B≤109)的柱予，用来榨汁． 假设柱子之间都被完美地粘合了，这样水不会顺着柱子与柱子之间的空隙流走．但是约翰一直不知道，这么一个榨汁机，到底能装多少果汁？假设榨汁机周围没有任何东西，也就是说，边界上的水都会流走，有些榨汁机则根本不能装下任何的果汁． 题解：这个就是从最外围往里扫，然后如果当前扫到的格子周围有没有被扫过的且高度比当前格子低的话，可以对答案产生一定贡献，但是我们得保证扫到的格子，周围格子height&lt;当前格子的height中，其其他方向的三个格子都要&gt;=当前扫到的格子的height，所以用priority_queue瞎搞就完了。 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 515;struct Node&#123;int x, y, h; bool operator &lt; (const Node &amp;gg) const &#123;return h &gt; gg.h;&#125;&#125;;int a[MAXN][MAXN], vis[MAXN][MAXN], dx[15] = &#123;0, 1, 0, 0, -1&#125;, dy[15] = &#123;0, 0, 1, -1, 0&#125;, n, m;priority_queue &lt;Node&gt; q;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;LL getans()&#123; LL ans = 0; vis[1][1] = vis[1][m] = vis[n][1] = vis[n][m] = 1; for(int i = 2; i &lt; n; i ++) q.push((Node)&#123;i, 1, a[i][1]&#125;), q.push((Node)&#123;i, m, a[i][m]&#125;), vis[i][1] = vis[i][m] = 1; for(int i = 2; i &lt; m; i ++) q.push((Node)&#123;1, i, a[1][i]&#125;), q.push((Node)&#123;n, i, a[n][i]&#125;), vis[1][i] = vis[n][i] = 1; while(!q.empty())&#123; int x = q.top().x, y = q.top().y, h = q.top().h; q.pop(); for(int i = 1; i &lt;= 4; i ++)&#123; int x1 = x + dx[i], y1 = y + dy[i]; if(x1 &lt; 1 || x1 &gt; n || y1 &lt; 1 || y1 &gt; m || vis[x1][y1]) continue; vis[x1][y1] = 1; if(a[x1][y1] &lt; h)&#123; ans += (LL)h - a[x1][y1]; a[x1][y1] = h; &#125; q.push((Node)&#123;x1, y1, a[x1][y1]&#125;); &#125; &#125; return ans;&#125;void work()&#123; m = read(), n = read(); for(int i = 1; i &lt;= n; i ++) for(int j = 1; j &lt;= m; j ++) a[i][j] = read(); printf("%lld\n", getans());&#125;int main()&#123; work(); return 0;&#125;]]></content>
@@ -612,8 +624,8 @@
       <tags>
         <tag>图论</tag>
         <tag>最短路</tag>
-        <tag>数论</tag>
         <tag>Tarjan</tag>
+        <tag>数论</tag>
         <tag>线段树</tag>
       </tags>
   </entry>
