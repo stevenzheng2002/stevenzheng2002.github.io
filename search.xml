@@ -28,10 +28,22 @@
     <content type="text"><![CDATA[题意：奶牛们接到了寻找一种新型挤奶机的任务，为此它们准备依次经过N(1≤N≤50000)颗行星，在行星上进行交易．为了方便，奶牛们已经给可能出现的K(1≤K≤1000)种货物进行了由1到K的标号．由于这些行星都不是十分发达．没有流通的货币，所以在每个市场里都只能用固定的一种货物去换取另一种货物． 奶牛们带着一种上好的饲料从地球出发，希望进行最少的交易，最终得到所需要的机器．饲料的标号为1，所需要的机器的标号为K.如果任务无法完成，输出-1. 题解：裸的最短路 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 1e5 + 15;const int INF = 1e9 + 7;struct Edge&#123;int to, nxt;&#125;g[MAXN &lt;&lt; 1];int head[MAXN], cnt = 0, dist[MAXN], n, k;bool vis[MAXN]; queue &lt;int&gt; q;inline void add(int u, int v)&#123;g[++ cnt] = (Edge)&#123;v, head[u]&#125;; head[u] = cnt;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; n = read(), k = read(); for(int i = 1; i &lt;= n; i ++)&#123; int u = read(), v = read(); add(u, v); &#125; for(int i = 1; i &lt;= k; i ++) dist[i] = INF; dist[1] = 0; vis[1] = 1; q.push(1); while(!q.empty())&#123; int u = q.front(); q.pop(); vis[u] = 0; for(int i = head[u]; i; i = g[i].nxt)&#123; int v = g[i].to; if(dist[v] &gt; dist[u] + 1)&#123; dist[v] = dist[u] + 1; if(!vis[v])&#123;vis[v] = 1; q.push(v);&#125; &#125; &#125; &#125; if(dist[k] &gt; 1e8) printf("-1\n"); else printf("%d\n", dist[k] + 1);&#125;int main()&#123; work(); return 0;&#125;]]></content>
       <categories>
         <category>知识点</category>
-        <category>讲解</category>
+        <category>题解</category>
       </categories>
       <tags>
         <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[bzoj1685 Allowance 题解]]></title>
+    <url>%2F2018%2F02%2F13%2Fbzoj1685-Allowance-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：作为对勤勤恳恳工作的贝茜的奖励，约翰已经决定开始支付贝茜一个小的每周津贴． 约翰有n(1≤N≤20)种币值的硬币，面值小的硬币总能整除面值较大的硬币．比如说，币值有如下几种：1美分，5美分，10美分，50美分. 利用给定的这些硬币，他将要每周至少付给贝茜一定金额的津贴C(1≤C≤10^8)． 请帮他计算出他最多能给贝茜发几周的津贴． 题解：考虑贪心，因为每种金币的面值都是成倍增长的，所以，我们对于面值&gt;=c的，直接给贝茜，&lt;c的呢，我们从小到大排序，从大到小渐渐补齐c，如果能补成==c，那么直接给她，如果不能补得那么整，我们就拿最小面值的给她补上。 代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 115;struct Node&#123;int v, b;&#125;a[MAXN];int n, c, l, r, ans = 0;bool cmp(Node x, Node y)&#123;return x.v &lt; y.v;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;bool pd()&#123; int s = 0; for(int i = r; i &gt;= l; i --)&#123; int tmp = min((c - s) / a[i].v, a[i].b); s += tmp * a[i].v; a[i].b -= tmp; if(s == c) return 1; &#125; while(!a[l].b &amp;&amp; l &lt;= r) l ++; while(!a[r].b &amp;&amp; l &lt;= r) r --; if(l &gt; r) return 0; while(s &lt; c)&#123; int tmp = min((c - s) / a[l].v + 1, a[l].b); s += tmp * a[l].v; a[l].b -= tmp; if(!a[l].b) l ++; if(l &gt; r) break; &#125; if(s &lt; c) return 0; return 1;&#125;void work()&#123; n = read(), c = read(); l = 1, r = n; for(int i = 1; i &lt;= n; i ++) a[i].v = read(), a[i].b = read(); sort(a + 1, a + n + 1, cmp); while(a[r].v &gt;= c &amp;&amp; l &lt;= r)&#123;ans += a[r].b; r --;&#125; while(pd()) ans ++; printf("%d\n", ans);&#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>讲解</category>
+      </categories>
+      <tags>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -40,7 +52,7 @@
     <content type="text"><![CDATA[题意：约翰经常给产奶量高的奶牛发特殊津贴，于是很快奶牛们拥有了大笔不知该怎么花的钱．为此，约翰购置了N(1≤N≤2000)份美味的零食来卖给奶牛们．每天约翰售出一份零食．当然约翰希望这些零食全部售出后能得到最大的收益．这些零食有以下这些有趣的特性： •零食按照1．．N编号，它们被排成一列放在一个很长的盒子里．盒子的两端都有开口，约翰每 天可以从盒子的任一端取出最外面的一个． •与美酒与好吃的奶酪相似，这些零食储存得越久就越好吃．当然，这样约翰就可以把它们卖出更高的价钱． •每份零食的初始价值不一定相同．约翰进货时，第i份零食的初始价值为Vi(1≤Vi≤1000)． •第i份零食如果在被买进后的第a天出售，则它的售价是vi×a． Vi的是从盒子顶端往下的第i份零食的初始价值．约翰告诉了你所有零食的初始价值，并希望你能帮他计算一下，在这些零食全被卖出后，他最多能得到多少钱． 题解：f[i]表示从i开始的最多能得的钱，我们枚举j，那么 $f_i=max(f[i]+a[i+j]\times (n-j), f[i+1]+a[i]\times (n-j))$ 代码：123456789101112131415161718192021222324252627282930313233343536373839#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 5e3 + 15;int f[MAXN], a[MAXN];inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; int n = read(); for(int i = 1; i &lt;= n; i ++) a[i] = read(), f[i] = a[i] * n; for(int j = 1; j &lt; n; j ++)&#123; for(int i = 1; i + j &lt;= n; i ++)&#123; int k = i + j; f[i] = max(f[i] + a[k] * (n - j), f[i + 1] + a[i] * (n - j)); &#125; //for(int i = 1; i + j; i ++) &#125; printf("%d\n", f[1]);&#125;int main()&#123; work(); return 0;&#125;]]></content>
       <categories>
         <category>知识点</category>
-        <category>讲解</category>
+        <category>题解</category>
       </categories>
       <tags>
         <tag>动态规划</tag>
@@ -373,8 +385,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>树形dp</tag>
         <tag>动态规划</tag>
+        <tag>树形dp</tag>
         <tag>容斥原理</tag>
       </tags>
   </entry>
@@ -476,8 +488,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>KMP</tag>
         <tag>递推</tag>
+        <tag>KMP</tag>
       </tags>
   </entry>
   <entry>
