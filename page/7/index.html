@@ -329,7 +329,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2018/02/07/bzoj1638-usaco-Cow-Traffic-题解/">
+    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2017/10/15/POJ1679-The-Unique-Tree-题解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="stevenzheng2002">
@@ -348,7 +348,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/07/bzoj1638-usaco-Cow-Traffic-题解/" itemprop="url">bzoj1638 usaco Cow Traffic 题解</a></h1>
+                <a class="post-title-link" href="/2017/10/15/POJ1679-The-Unique-Tree-题解/" itemprop="url">POJ1679 The Unique Tree 题解</a></h1>
         
 
         <div class="post-meta">
@@ -360,8 +360,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T23:21:09+08:00">
-                2018-02-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T12:48:41+08:00">
+                2017-10-15
               </time>
             
 
@@ -425,7 +425,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  688
+                  578
                 </span>
               
 
@@ -464,11 +464,16 @@
       
         
           
-          题意：农场中,由于奶牛数量的迅速增长,通往奶牛宿舍的道路也出现了严重的交通拥堵问题.FJ打算找出最忙碌的道路来重点整治. 这个牧区包括一个由M (1 ≤ M ≤ 50,000)条单行道路(有向)组成的网络,以及 N (1 ≤ N ≤ 5,000)个交叉路口(编号为1..N),每一条道路连接两个不同的
+          题意：
+这道题的题意大概就是说给你一个图，求其最小生成树的路径权值和是否唯一。
+分析：
+很显然，n个点的次小生成树的路径权值和是小于等于最小生成树的路径权值和的，所以我们只要求一下这n个点的最小生成树和次小生成树，比较一下它们的路径权值和是否相等即可。
+代码：
+1234567891011121314
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/07/bzoj1638-usaco-Cow-Traffic-题解/#more" rel="contents">
+            <a class="btn" href="/2017/10/15/POJ1679-The-Unique-Tree-题解/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -527,7 +532,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2018/02/07/bzoj1577-usaco-Fair-Shuttle-题解/">
+    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2017/10/15/次小生成树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="stevenzheng2002">
@@ -546,7 +551,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/07/bzoj1577-usaco-Fair-Shuttle-题解/" itemprop="url">bzoj1577 usaco Fair Shuttle 题解</a></h1>
+                <a class="post-title-link" href="/2017/10/15/次小生成树/" itemprop="url">次小生成树</a></h1>
         
 
         <div class="post-meta">
@@ -558,8 +563,206 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T23:20:43+08:00">
-                2018-02-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T12:39:49+08:00">
+                2017-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/知识点/" itemprop="url" rel="index">
+                    <span itemprop="name">知识点</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/知识点/讲解与实践/" itemprop="url" rel="index">
+                    <span itemprop="name">讲解与实践</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  880
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          首先， 我们肯定知道最小生成树的求法， 什么kruskal啊， prim啊， 随随便便就水了很多题不是吗？在面对次小生成树问题的时候， 可以选择枚举原MST中的每一条边进行删除， 然后跑MST的算法（当然， 可能有更好的暴力方法， 这里就不详细描述了）， 这样一来， 复杂度就到了O(nmlogm)的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/15/次小生成树/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2017/10/09/洛谷P1941-飞扬的小鸟-题解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="stevenzheng2002">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Steven's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/09/洛谷P1941-飞扬的小鸟-题解/" itemprop="url">洛谷P1941 飞扬的小鸟 题解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T23:02:15+08:00">
+                2017-10-09
               </time>
             
 
@@ -623,7 +826,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  679
+                  1,409
                 </span>
               
 
@@ -639,7 +842,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  6
                 </span>
               
             </div>
@@ -662,12 +865,13 @@
       
         
           
-          题意:公交车一共经过N（1&lt;=N&lt;=20000）个站点，从站点1一直驶到站点N。K（1&lt;=K&lt;=50000)群奶牛希望搭乘这辆公交车。第i群牛一共有Mi（1&lt;=Mi&lt;=N)只.他们希望从Si到Ei去。
-公交车只能座C（1&lt;=C&lt;=100）只奶牛。而且不
+          今天本蒟蒻又搞了一道DP题——飞扬的小鸟。题目：题目描述
+Flappy Bird 是一款风靡一时的休闲手机游戏。玩家需要不断控制点击手机屏幕的频率来调节小鸟的飞行高度，让小鸟顺利通过画面右方的管道缝隙。如果小鸟一不小心撞到了水管或者掉在地上的话，便宣告失败。
+为了简化问题，我们对游戏规则进行了简化和
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/07/bzoj1577-usaco-Fair-Shuttle-题解/#more" rel="contents">
+            <a class="btn" href="/2017/10/09/洛谷P1941-飞扬的小鸟-题解/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -726,7 +930,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2018/02/07/bzoj1596-usaco-电话网络-题解/">
+    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2017/10/09/2017-10-1-2017-10-8总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="stevenzheng2002">
@@ -745,7 +949,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/07/bzoj1596-usaco-电话网络-题解/" itemprop="url">bzoj1596 usaco 电话网络 题解</a></h1>
+                <a class="post-title-link" href="/2017/10/09/2017-10-1-2017-10-8总结/" itemprop="url">2017.10.1-2017.10.8总结</a></h1>
         
 
         <div class="post-meta">
@@ -757,8 +961,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T23:20:14+08:00">
-                2018-02-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T23:01:18+08:00">
+                2017-10-09
               </time>
             
 
@@ -780,8 +984,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/知识点/" itemprop="url" rel="index">
-                    <span itemprop="name">知识点</span>
+                  <a href="/categories/总结/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
                   </a>
                 </span>
 
@@ -791,8 +995,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/知识点/题解/" itemprop="url" rel="index">
-                    <span itemprop="name">题解</span>
+                  <a href="/categories/总结/心得与体会/" itemprop="url" rel="index">
+                    <span itemprop="name">心得与体会</span>
                   </a>
                 </span>
 
@@ -822,7 +1026,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  754
+                  519
                 </span>
               
 
@@ -838,7 +1042,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  2
                 </span>
               
             </div>
@@ -861,11 +1065,13 @@
       
         
           
-          题意：Farmer John决定为他的所有奶牛都配备手机，以此鼓励她们互相交流。不过，为此FJ必须在奶牛们居住的N(1 &lt;= N &lt;= 10,000)块草地中选一些建上无线电通讯塔，来保证任意两块草地间都存在手机信号。所有的N块草地按1..N 顺次编号。 所有草地中只有N-1对是相邻的，
+          10.1-10.4总结显然，这四天是十一，最近过于疲惫的我请了3天的假，在家里好好休息了一番 （感觉在家休息也是做题学习啊）
+10.5总结时隔多天再做模拟赛。。。然而也没有多少天，也就4天没做模拟赛而已。。。
+今天交晚了，所以没成绩，不过我自己测了一下，应该是40分，尴尬。400分才做这么点分，实在
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/07/bzoj1596-usaco-电话网络-题解/#more" rel="contents">
+            <a class="btn" href="/2017/10/09/2017-10-1-2017-10-8总结/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -924,7 +1130,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2018/02/07/bzoj1571-usaco-ski-题解/">
+    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2017/10/09/2017-9月总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="stevenzheng2002">
@@ -943,7 +1149,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/07/bzoj1571-usaco-ski-题解/" itemprop="url">bzoj1571 usaco ski 题解</a></h1>
+                <a class="post-title-link" href="/2017/10/09/2017-9月总结/" itemprop="url">2017.9月总结</a></h1>
         
 
         <div class="post-meta">
@@ -955,8 +1161,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T23:19:41+08:00">
-                2018-02-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T22:58:06+08:00">
+                2017-10-09
               </time>
             
 
@@ -978,8 +1184,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/知识点/" itemprop="url" rel="index">
-                    <span itemprop="name">知识点</span>
+                  <a href="/categories/总结/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
                   </a>
                 </span>
 
@@ -989,8 +1195,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/知识点/题解/" itemprop="url" rel="index">
-                    <span itemprop="name">题解</span>
+                  <a href="/categories/总结/心得与体会/" itemprop="url" rel="index">
+                    <span itemprop="name">心得与体会</span>
                   </a>
                 </span>
 
@@ -1020,7 +1226,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  842
+                  5,800
                 </span>
               
 
@@ -1036,7 +1242,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  27
                 </span>
               
             </div>
@@ -1059,11 +1265,12 @@
       
         
           
-          题意：Farmer John 想要带着 Bessie 一起在科罗拉多州一起滑雪。很不幸，Bessie滑雪技术并不精湛。 Bessie了解到，在滑雪场里，每天会提供S(0&lt;=S&lt;=100)门滑雪课。第i节课始于M_i(1&lt;=M_i&lt;=10000),上的时间为L_i(1&lt;=
+          9.14总结​    今天就比较gg。如果我没有记错的话，我已经有一段时间没有考上过150了。虽然说我这次考了192，但是（是个人都懂）这个成绩很烂。
+​    今天这道题比较简单，比一般的比赛简单（要不然我这种juruo是不可能上100的）。第一题是一道暴力dp，第二题是道大模拟，第三个目测是dp
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/07/bzoj1571-usaco-ski-题解/#more" rel="contents">
+            <a class="btn" href="/2017/10/09/2017-9月总结/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1122,7 +1329,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2018/02/07/bzoj2101-usaco-Treasure-Chest-题解/">
+    <link itemprop="mainEntityOfPage" href="http://stevenzheng2002.top/2017/10/08/树链剖分/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="stevenzheng2002">
@@ -1141,7 +1348,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/07/bzoj2101-usaco-Treasure-Chest-题解/" itemprop="url">bzoj2101 usaco Treasure Chest 题解</a></h1>
+                <a class="post-title-link" href="/2017/10/08/树链剖分/" itemprop="url">树链剖分</a></h1>
         
 
         <div class="post-meta">
@@ -1153,8 +1360,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T23:19:05+08:00">
-                2018-02-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T22:40:46+08:00">
+                2017-10-08
               </time>
             
 
@@ -1187,8 +1394,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/知识点/题解/" itemprop="url" rel="index">
-                    <span itemprop="name">题解</span>
+                  <a href="/categories/知识点/讲解与实践/" itemprop="url" rel="index">
+                    <span itemprop="name">讲解与实践</span>
                   </a>
                 </span>
 
@@ -1218,7 +1425,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  816
+                  1,559
                 </span>
               
 
@@ -1234,7 +1441,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  7
                 </span>
               
             </div>
@@ -1257,11 +1464,11 @@
       
         
           
-          题意：Bessie and Bonnie have found a treasure chest full of marvelous gold coins! Being cows, though, they can’t just walk into a store and buy stuff, so
+          “在一棵树上进行路径的修改、求极值、求和”乍一看只要线段树就能轻松解决，实际上，仅凭线段树是不能搞定它的。我们需要用到一种貌似高级的复杂算法——树链剖分。​ 树链，就是树上的路径。剖分，就是把路径分类为重链和轻链。    记siz[v]表示以v为根的子树的节点数，dep[v]表示v的深度(根深度为1
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/07/bzoj2101-usaco-Treasure-Chest-题解/#more" rel="contents">
+            <a class="btn" href="/2017/10/08/树链剖分/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1311,7 +1518,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
   </nav>
 
 
@@ -1361,7 +1568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1372,7 +1579,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1383,7 +1590,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1503,7 +1710,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共94.1k字</span>
 </div>
         
 
