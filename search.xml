@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[bzoj3999 旅游 题解]]></title>
+    <url>%2F2018%2F02%2F26%2Fbzoj3999-%E6%97%85%E6%B8%B8-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：为了提高智商，ZJY准备去往一个新世界去旅游。这个世界的城市布局像一棵树。每两座城市之间只有一条路径可 以互达。每座城市都有一种宝石，有一定的价格。ZJY为了赚取最高利益，她会选择从A城市买入再转手卖到B城市 。由于ZJY买宝石时经常卖萌，因而凡是ZJY路过的城市，这座城市的宝石价格会上涨。让我们来算算ZJY旅游完之 后能够赚取的最大利润。（如a城市宝石价格为v，则ZJY出售价格也为v） 题解：这道题吗，它让你求x到y的路径上两数之差的最大值，小一点的数先走到，最后再都加上v。 很明显的树剖啊，挺裸的，就是维护的东西多了点。 我们维护每个链上的maxn，minn，$suml = max(vi-vj) (ij)$ 为什么这样维护呢？我们会发现，一条路径普遍情况是倒V型，左边的这条路径我们要找ans的话应该找suml，右边的路径则找sumr。 具体的合并看代码就好了，一般就三种情况：左边找一个maxn/minn，右边找一个minn/maxn，两个之差；左边的suml/sumr；右边的suml/sumr，取max。 代码一定要细心地写啊。。。要不然就会像我一样调了2天。 代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158#include &lt;bits/stdc++.h&gt; #define REP(i, a, b) for(int i = a; i &lt;= b; i ++)#define REPG(i, x) for(int i = head[x]; i; i = g[i].nxt) #define clr(x, y) memset(x, y, sizeof(x));#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1#define INF 0x7ffffff using namespace std; typedef long long LL;typedef double LF; LL Max(LL a, LL b)&#123;return a &gt; b ? a : b;&#125;LL Min(LL a, LL b)&#123;return a &lt; b ? a : b;&#125;LL abs(LL x)&#123;return x &gt; 0 ? x : -x;&#125; const int MAXN = 1e5 + 15; struct Edge&#123;int to, nxt;&#125;g[MAXN &lt;&lt; 2];struct SegmentTree&#123;int suml, sumr, maxn, minn;&#125;s[MAXN &lt;&lt; 2];SegmentTree Null = &#123;-INF, -INF, -INF, INF&#125;;int n, q, head[MAXN], cnt = 0, tt = 0, size[MAXN], son[MAXN], top[MAXN], fa[MAXN], w[MAXN], wt[MAXN], id[MAXN], dep[MAXN], lzy[MAXN &lt;&lt; 2]; inline void add(int u, int v)&#123;g[++ cnt] = (Edge)&#123;v, head[u]&#125;; head[u] = cnt;&#125;inline void add_edge(int u, int v)&#123;add(u, v); add(v, u);&#125;inline void up(int o)&#123; s[o].maxn = max(s[lson].maxn, s[rson].maxn); s[o].minn = min(s[lson].minn, s[rson].minn); s[o].suml = max(s[lson].maxn - s[rson].minn, max(s[lson].suml, s[rson].suml)); s[o].sumr = max(s[rson].maxn - s[lson].minn, max(s[lson].sumr, s[rson].sumr));&#125;inline void down(int o)&#123; if(!lzy[o]) return ; lzy[lson] += lzy[o]; lzy[rson] += lzy[o]; s[lson].maxn += lzy[o]; s[rson].maxn += lzy[o]; s[lson].minn += lzy[o]; s[rson].minn += lzy[o]; lzy[o] = 0;&#125; inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125; void build(int o, int l, int r)&#123; if(l == r)&#123; s[o] = (SegmentTree)&#123;0, 0, wt[l], wt[l]&#125;; return ; &#125; int mid = l + r &gt;&gt; 1; build(lson, l, mid); build(rson, mid + 1, r); up(o);&#125; void modify(int o, int l, int r, int x, int y, int c)&#123; if(x &lt;= l &amp;&amp; r &lt;= y)&#123; s[o].maxn += c, s[o].minn += c, lzy[o] += c; return ; &#125; down(o); int mid = l + r &gt;&gt; 1; if(x &lt;= mid) modify(lson, l, mid, x, y, c); if(y &gt; mid) modify(rson, mid + 1, r, x, y, c); up(o);&#125; SegmentTree getans(int o, int l, int r, int x, int y)&#123; if(x &lt;= l &amp;&amp; r &lt;= y) return s[o]; down(o); int mid = l + r &gt;&gt; 1; if(y &lt;= mid) return getans(lson, l, mid, x, y); else if(x &gt; mid) return getans(rson, mid + 1, r, x, y); SegmentTree ret, t1 = getans(lson, l, mid, x, y), t2 = getans(rson, mid + 1, r, x, y); ret.maxn = max(t1.maxn, t2.maxn); ret.minn = min(t1.minn, t2.minn); ret.suml = max(t1.maxn - t2.minn, max(t1.suml, t2.suml)); ret.sumr = max(t2.maxn - t1.minn, max(t1.sumr, t2.sumr)); return ret;&#125; void dfs1(int u, int fafa, int dd)&#123; dep[u] = dd; fa[u] = fafa; size[u] = 1; for(int i = head[u]; i; i = g[i].nxt)&#123; int v = g[i].to; if(v == fafa) continue; dfs1(v, u, dd + 1); size[u] += size[v]; if(size[v] &gt; size[son[u]]) son[u] = v; &#125;&#125; void dfs2(int u, int topf)&#123; id[u] = ++ tt; wt[tt] = w[u]; top[u] = topf; if(!son[u]) return ; dfs2(son[u], topf); for(int i = head[u]; i; i = g[i].nxt)&#123; int v = g[i].to; if(v == fa[u] || v == son[u]) continue; dfs2(v, v); &#125;&#125; void query(int x, int y, int c)&#123; SegmentTree ansl = Null, ansr = Null, t; int f1 = top[x], f2 = top[y]; while(f1 != f2)&#123; if(dep[f1] &lt; dep[f2])&#123; t = getans(1, 1, n, id[f2], id[y]); ansr.sumr = max(ansr.maxn - t.minn, max(t.sumr, ansr.sumr)); ansr.maxn = max(ansr.maxn, t.maxn); ansr.minn = min(ansr.minn, t.minn); modify(1, 1, n, id[f2], id[y], c); y = fa[f2], f2 = top[y]; &#125; else &#123; t = getans(1, 1, n, id[f1], id[x]); ansl.suml = max(t.maxn - ansl.minn, max(t.suml, ansl.suml)); ansl.maxn = max(ansl.maxn, t.maxn); ansl.minn = min(ansl.minn, t.minn); modify(1, 1, n, id[f1], id[x], c); x = fa[f1], f1 = top[x]; &#125; &#125; if(dep[x] &lt; dep[y])&#123; t = getans(1, 1, n, id[x], id[y]); ansr.sumr = max(ansr.maxn - t.minn, max(t.sumr, ansr.sumr)); ansr.maxn = max(ansr.maxn, t.maxn); ansr.minn = min(ansr.minn, t.minn); modify(1, 1, n, id[x], id[y], c); &#125; else &#123; t = getans(1, 1, n, id[y], id[x]); ansl.suml = max(t.maxn - ansl.minn, max(t.suml, ansl.suml)); ansl.maxn = max(ansl.maxn, t.maxn); ansl.minn = min(ansl.minn, t.minn); modify(1, 1, n, id[y], id[x], c); &#125; printf("%d\n", max(ansr.maxn - ansl.minn, max(ansl.suml, ansr.sumr)));&#125;void work()&#123; n = read(); for(int i = 1; i &lt;= n; i ++) w[i] = read(); for(int i = 1; i &lt; n; i ++)&#123; int u = read(), v = read(); add_edge(u, v); &#125; dfs1(1, 0, 1); dfs2(1, 1); build(1, 1, n); q = read(); while(q --)&#123; int a = read(), b = read(), c = read(); query(a, b, c); &#125;&#125; int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+        <tag>树链剖分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[洛谷2483 魔法猪学院 题解]]></title>
+    <url>%2F2018%2F02%2F22%2F%E6%B4%9B%E8%B0%B72483-%E9%AD%94%E6%B3%95%E7%8C%AA%E5%AD%A6%E9%99%A2-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：iPig在假期来到了传说中的魔法猪学院，开始为期两个月的魔法猪训练。经过了一周理论知识和一周基本魔法的学习之后，iPig对猪世界的世界本原有了很多的了解：众所周知，世界是由元素构成的；元素与元素之间可以互相转换；能量守恒……。 能量守恒……iPig 今天就在进行一个麻烦的测验。iPig 在之前的学习中已经知道了很多种元素，并学会了可以转化这些元素的魔法，每种魔法需要消耗 iPig 一定的能量。作为 PKU 的顶尖学猪，让 iPig 用最少的能量完成从一种元素转换到另一种元素……等等，iPig 的魔法导猪可没这么笨！这一次，他给 iPig 带来了很多 1 号元素的样本，要求 iPig 使用学习过的魔法将它们一个个转化为 N 号元素，为了增加难度，要求每份样本的转换过程都不相同。这个看似困难的任务实际上对 iPig 并没有挑战性，因为，他有坚实的后盾……现在的你呀！ 注意，两个元素之间的转化可能有多种魔法，转化是单向的。转化的过程中，可以转化到一个元素（包括开始元素）多次，但是一但转化到目标元素，则一份样本的转化过程结束。iPig 的总能量是有限的，所以最多能够转换的样本数一定是一个有限数。具体请参看样例。 题解：这道题就是K短路模板。 我们用spfa+A*来解决这道题。 首先有个叫估价函数的重要内容：f(x)=g(x)+h(x)； f(x)为总估价值，g(x)为当前真实价值，h(x)为当前估价值。 用人话讲就是： f(x)表示从1～n的总花费 g(x)表示从1～x所走过的路径总和 h(x)表示从x～n估计要走的长度 首先，h(x)是要往小的方向估计，所以h(x)最小时就是x到n的最短路，于是就反向跑一遍spfa预处理就好了。 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495#include &lt;bits/stdc++.h&gt;#define REP(i, a, b) for(int i = a; i &lt;= b; i ++)#define REPG(i, x) for(int i = head[x]; i; i = g[i].nxt)#define clr(x, y) memset(x, y, sizeof(x));using namespace std;typedef long long LL;typedef double LF;LL Max(LL a, LL b)&#123;return a &gt; b ? a : b;&#125;LL Min(LL a, LL b)&#123;return a &lt; b ? a : b;&#125;LL abs(LL x)&#123;return x &gt; 0 ? x : -x;&#125;const int MAXN = 5e3 + 15;const int MAXM = 2e5 + 15;const LF INF = 2e9;const LF eps = 1e-7;struct Node&#123; int now; LF step, h; bool operator &lt; (const Node x) const &#123; return (h == x.h) ? step &gt; x.step : h &gt; x.h; &#125;&#125;;struct Edge&#123;int to, nxt; LF dis;&#125;g[MAXM &lt;&lt; 1];int head[MAXN], cnt = -1, n, m, ans = 0; LF e, dist[MAXN];queue &lt;int&gt; q; priority_queue &lt;Node&gt; q1; bool vis[MAXN];inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void add(int u, int v, LF dis)&#123;g[++ cnt] = (Edge)&#123;v, head[u], dis&#125;; head[u] = cnt;&#125;void add_edge(int u, int v, LF dis)&#123;add(u, v, dis); add(v, u, dis);&#125;void spfa()&#123; for(int i = 1; i &lt;= n; i ++) dist[i] = INF; q.push(n); vis[n] = 1; dist[n] = 0; while(!q.empty())&#123; int u = q.front(); q.pop(); vis[u] = 0; for(int i = head[u]; ~i; i = g[i].nxt)&#123; if(!(i &amp; 1)) continue; int v = g[i].to; if(dist[v] &gt; dist[u] + g[i].dis)&#123; dist[v] = dist[u] + g[i].dis; if(!vis[v])&#123;vis[v] = 1; q.push(v);&#125; &#125; &#125; &#125; //for(int i = 1; i &lt;= n; i ++) printf("%.2lf ", dist[i]); printf("\n");&#125;void Astar()&#123; Node s; s.now = 1; s.step = 0; s.h = s.step + dist[s.now]; q1.push(s); while(!q1.empty())&#123; Node x = q1.top(); q1.pop(); if(x.step &gt; e) continue ; if(x.now == n)&#123; if(e &gt;= x.step) ans ++, e -= x.step; else return ; &#125; if(x.h &gt; e) break; for(int i = head[x.now]; ~i; i = g[i].nxt)&#123; if(i &amp; 1) continue; int v = g[i].to; Node y; y.now = v; y.step = x.step + g[i].dis; y.h = y.step + dist[v]; if(y.h &gt; e) continue; q1.push(y); &#125; &#125;&#125;void work()&#123; clr(head, -1); n = read(), m = read(); scanf("%lf", &amp;e); for(int i = 1; i &lt;= m; i ++)&#123; int u = read(), v = read(); LF dis; scanf("%lf", &amp;dis); add_edge(u, v, dis); &#125; spfa(); Astar(); printf("%d\n", ans);&#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>SPFA</tag>
+        <tag>Astar</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bzoj1412 狼和羊的故事 题解]]></title>
     <url>%2F2018%2F02%2F20%2Fbzoj1412-%E7%8B%BC%E5%92%8C%E7%BE%8A%E7%9A%84%E6%95%85%E4%BA%8B-%E9%A2%98%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[题意：“狼爱上羊啊爱的疯狂，谁让他们真爱了一场；狼爱上羊啊并不荒唐，他们说有爱就有方向．．．．．．” Orez听到这首歌，心想：狼和羊如此和谐，为什么不尝试羊狼合养呢？说干就干！ Orez的羊狼圈可以看作一个n*m个矩阵格子，这个矩阵的边缘已经装上了篱笆。可是Drake很快发现狼再怎么也是狼，它们总是对羊垂涎三尺，那首歌只不过是一个动人的传说而已。所以Orez决定在羊狼圈中再加入一些篱笆，还是要将羊狼分开来养。 通过仔细观察，Orez发现狼和羊都有属于自己领地，若狼和羊们不能呆在自己的领地，那它们就会变得非常暴躁，不利于他们的成长。 Orez想要添加篱笆的尽可能的短。当然这个篱笆首先得保证不能改变狼羊的所属领地，再就是篱笆必须修筑完整，也就是说必须修建在单位格子的边界上并且不能只修建一部分。 题解：（题解来自hzwer）挖掘栅栏的本质：只能建在相邻两个，且建好后使得狼和羊之间不存在通路。而割的定义是：使S集和T集不存在通路。而题目又要求建的栅栏最少，于是就是最小割问题了。 从源点向所有狼连一条∞的边，从所有羊向汇点连一条∞的边，这样就能保证狼和羊都在不同的点集里。然后再从狼到相邻的羊和空地，空地到相邻的空地和羊连一条流量为1的边，最大流求最小割即可。 或者将所有点向四周连边。。就是时间长了点 代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;bits/stdc++.h&gt; using namespace std; typedef long long LL;typedef double LF; #define clr(x, y) memset(x, y, sizeof(x))#define INF 0x7fffffff const int MAXN = 2e4 + 15;const int MAXM = 2e6 + 15; struct Edge&#123;int to, nxt, c;&#125;g[MAXM &lt;&lt; 1];int head[MAXN], cur[MAXN], cnt = -1, d[MAXN], n, m, a[115][115], s, t;int dx[5] = &#123;0, 1, 0, -1, 0&#125;;int dy[5] = &#123;0, 0, 1, 0, -1&#125;;queue &lt;int&gt; q; inline void add(int u, int v, int w)&#123;g[++ cnt] = (Edge)&#123;v, head[u], w&#125;; head[u] = cnt;&#125;inline void add_edge(int u, int v, int w)&#123;add(u, v, w); add(v, u, 0);&#125; inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125; bool bfs()&#123; clr(d, -1); q.push(s); d[s] = 0; while(!q.empty())&#123; int u = q.front(); q.pop(); for(int i = head[u]; ~i; i = g[i].nxt)&#123; int v = g[i].to; if(g[i].c &gt; 0 &amp;&amp; d[v] == -1)&#123; d[v] = d[u] + 1; q.push(v); &#125; &#125; &#125; return (d[t] != -1);&#125; int dfs(int u, int flow)&#123; if(u == t) return flow; int ret = 0; for(int&amp; i = cur[u]; ~i; i = g[i].nxt)&#123; int v = g[i].to; if(g[i].c &gt; 0 &amp;&amp; d[v] == d[u] + 1)&#123; int tmp = dfs(v, min(flow, g[i].c)); flow -= tmp; g[i].c -= tmp; ret += tmp; g[i ^ 1].c += tmp; if(!flow) break; &#125; &#125; if(!ret) d[u] = -1; return ret;&#125; void dinic()&#123; int ret = 0; while(bfs())&#123; for(int i = 1; i &lt;= n * m + 2; i ++) cur[i] = head[i]; ret += dfs(s, INF); &#125; printf("%d\n", ret);&#125; void work()&#123; clr(head, -1); n = read(), m = read(); s = n * m + 1, t = n * m + 2; for(int i = 1; i &lt;= n; i ++) for(int j = 1; j &lt;= m; j ++) a[i][j] = read(); for(int i = 1; i &lt;= n; i ++)&#123; for(int j = 1; j &lt;= m; j ++)&#123; if(a[i][j] == 1) add_edge(s, (i - 1) * m + j, INF); else if(a[i][j] == 2) add_edge((i - 1) * m + j, t, INF); if(a[i][j] == 2) continue; for(int gg = 1; gg &lt;= 4; gg ++)&#123; int nowx = i + dx[gg], nowy = j + dy[gg]; if(nowx &lt; 1 || nowx &gt; n || nowy &lt; 1 || nowy &gt; m) continue; if(a[i][j] != 1 || a[nowx][nowy] != 1) add_edge((i - 1) * m + j, (nowx - 1) * m + nowy, 1); &#125; &#125; &#125; dinic();&#125; int main()&#123; work(); return 0;&#125;]]></content>
@@ -57,14 +83,14 @@
         <tag>图论</tag>
         <tag>最近公共祖先</tag>
         <tag>模拟</tag>
-        <tag>枚举</tag>
-        <tag>并查集</tag>
-        <tag>dfs</tag>
-        <tag>搜索</tag>
         <tag>贪心</tag>
         <tag>二分答案</tag>
-        <tag>动态规划</tag>
         <tag>字符串</tag>
+        <tag>动态规划</tag>
+        <tag>枚举</tag>
+        <tag>搜索</tag>
+        <tag>并查集</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -80,12 +106,12 @@
         <tag>最近公共祖先</tag>
         <tag>数论</tag>
         <tag>模拟</tag>
-        <tag>枚举</tag>
-        <tag>搜索</tag>
-        <tag>动态规划</tag>
         <tag>字符串</tag>
+        <tag>动态规划</tag>
         <tag>01背包</tag>
         <tag>完全背包</tag>
+        <tag>枚举</tag>
+        <tag>搜索</tag>
       </tags>
   </entry>
   <entry>
@@ -99,14 +125,14 @@
       <tags>
         <tag>数论</tag>
         <tag>模拟</tag>
-        <tag>贪心</tag>
-        <tag>二分答案</tag>
         <tag>倍增</tag>
+        <tag>贪心</tag>
         <tag>排序</tag>
         <tag>高精度</tag>
         <tag>进制</tag>
         <tag>扩展欧几里得</tag>
         <tag>前缀和</tag>
+        <tag>二分答案</tag>
       </tags>
   </entry>
   <entry>
@@ -757,8 +783,8 @@
       <tags>
         <tag>图论</tag>
         <tag>最短路</tag>
-        <tag>数论</tag>
         <tag>Tarjan</tag>
+        <tag>数论</tag>
         <tag>线段树</tag>
       </tags>
   </entry>
