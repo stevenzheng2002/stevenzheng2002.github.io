@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[cf518D Ilya and Escalator 题解]]></title>
+    <url>%2F2018%2F04%2F03%2Fcf518D-Ilya-and-Escalator-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：有 n 个人排成一列，每秒中队伍最前面的人有 p 的概率走上电梯（一旦走上就不会下电梯），或者有 1 - p 的概率不动。问你 T 秒过后，在电梯上的人的期望。 题解：这道题我们考虑设$f{i,j}$表示前i秒，电梯上有j个人的概率，那么$ans=\sum{0\leq k\leq n}f_{t,k}$ 我们考虑刷表法，对于已知的$f{i,j}$，我们可以给$f{i+1,j}和f{i+1,j+1}$分别加上$(1-p)\times f{i,j}和p\times f_{i,j}$ 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))const int MAXN = 5e3 + 15;LF f[MAXN][MAXN];inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; int n = read(); LF p; scanf("%lf", &amp;p); int t = read(); f[0][0] = 1.0; for(int i = 0; i &lt; t; i ++)&#123; f[i + 1][n] += f[i][n]; for(int j = 0; j &lt; n; j ++)&#123; f[i + 1][j + 1] += p * f[i][j]; f[i + 1][j] += (1 - p) * f[i][j]; &#125; &#125; /* for(int i = 1; i &lt;= t; i ++)&#123; for(int j = 0; j &lt;= n; j ++) printf("%.2lf ", f[i][j]); puts(""); &#125; */ LF ans = 0; for(int i = 0; i &lt;= n; i ++) ans += 1.0 * i * f[t][i]; printf("%.6lf\n", ans);&#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>期望</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[bzoj4318 osu 题解]]></title>
+    <url>%2F2018%2F04%2F03%2Fbzoj4318-osu-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：osu 是一款群众喜闻乐见的休闲软件。 我们可以把osu的规则简化与改编成以下的样子: 一共有n次操作，每次操作只有成功与失败之分，成功对应1，失败对应0，n次操作对应为1个长度为n的01串。在这个串中连续的 X个1可以贡献X^3 的分数，这x个1不能被其他连续的1所包含（也就是极长的一串1，具体见样例解释） 现在给出n，以及每个操作的成功率，请你输出期望分数，输出四舍五入后保留1位小数。 题解：这道题和那个tyvj的Easy题比较像。我们增加一个tmp2来维护极大连续的o的期望个数的平方，然后每位对ans的贡献就是tmp2 3 + tmp1 3 + 1。 为什么要维护tmp2呢？因为E(x)^2!=E(x^2) 代码：1234567891011121314151617181920212223242526272829303132333435#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))const int MAXN = 1e5 + 15;LF p[MAXN];inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; int n = read(); for(int i = 1; i &lt;= n; i ++) scanf("%lf", &amp;p[i]); LF tmp1 = 0, tmp2 = 0, ans = 0; for(int i = 1; i &lt;= n; i ++)&#123; ans += (tmp2 * 3 + tmp1 * 3 + 1) * p[i]; tmp2 = (tmp2 + tmp1 * 2 + 1) * p[i]; tmp1 = (tmp1 + 1) * p[i]; &#125; printf("%.1lf\n", ans);&#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>期望</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[洛谷1533 可怜的狗狗 题解]]></title>
+    <url>%2F2018%2F04%2F03%2F%E6%B4%9B%E8%B0%B71533-%E5%8F%AF%E6%80%9C%E7%9A%84%E7%8B%97%E7%8B%97-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：小卡家有N只狗，由于品种、年龄不同，每一只狗都有一个不同的漂亮值。漂亮值与漂亮的程度成反比（漂亮值越低越漂亮），吃饭时，狗狗们会按顺序站成一排等着主人给食物。 可是嘉嘉真的很懒，他才不肯喂这么多狗呢，这多浪费时间啊，于是他每次就只给第i只到第j只狗中第k漂亮的狗狗喂食（好狠心的人啊）。而且为了保证某一只狗狗不会被喂太多次，他喂的每个区间（i,j）不互相包含。 题解：这道题其实就是问你区间第k小，主席树模板题，我闲的没事就打了个splay（主要是不会打了） 我们离线下来，对于所有询问我们按左端点从小打到大排个序，每次暴力删点加点了，然后find_rnk就完了。 代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;LL Max(LL a, LL b)&#123;return a &gt; b ? a : b;&#125;LL Min(LL a, LL b)&#123;return a &lt; b ? a : b;&#125;const int MAXN = 3e5 + 15;struct Query&#123;int l, r, k, id;&#125;b[MAXN];int n, m, rt, sz = 0, fa[MAXN], son[MAXN][2], key[MAXN], cnt[MAXN], size[MAXN], a[MAXN], ans[MAXN];inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;bool cmp(Query x, Query y)&#123;return x.l &lt; y.l;&#125;inline void up(int p)&#123;size[p] = cnt[p] + size[son[p][0]] + size[son[p][1]];&#125;inline int get(int x)&#123;return son[fa[x]][1] == x;&#125;inline void rotate(int x)&#123; int p = fa[x], g = fa[p], opt = get(x); son[p][opt] = son[x][opt ^ 1]; fa[son[x][opt ^ 1]] = p; son[x][opt ^ 1] = p; fa[p] = x; fa[x] = g; if(g) son[g][son[g][1] == p] = x; up(p); up(x);&#125;inline int splay(int x)&#123; for(int p = fa[x]; p; rotate(x), p = fa[x]) if(fa[p]) rotate((get(p) == get(x)) ? p : x); rt = x;&#125;inline void ins(int x)&#123; if(!rt)&#123; ++ sz; rt = sz; key[sz] = x; size[sz] = cnt[sz] = 1; son[sz][0] = son[sz][1] = fa[sz] = 0; return ; &#125; int now = rt, p = 0; while(1)&#123; if(key[now] == x)&#123; cnt[now] ++; up(now); up(p); splay(now); return ; &#125; p = now; now = son[now][x &gt; key[now]]; if(!now)&#123; sz ++; key[sz] = x; size[sz] = cnt[sz] = 1; son[sz][0] = son[sz][1] = 0; son[p][x &gt; key[p]] = sz; fa[sz] = p; up(p); splay(sz); return ; &#125; &#125;&#125;inline int find(int x)&#123; int now = rt, ans = 0; while(1)&#123; if(x == key[now])&#123;ans += size[son[now][0]]; splay(now); return ans + 1;&#125; if(x &lt; key[now]) now = son[now][0]; else &#123; ans += size[son[now][0]] + cnt[now]; now = son[now][1]; &#125; &#125;&#125;inline int find_rnk(int x)&#123; int now = rt; while(1)&#123; if(x == -1) return -1; if(x &gt;= size[son[now][0]] + 1 &amp;&amp; x &lt;= size[son[now][0]] + cnt[now]) return key[now]; if(x &lt;= size[son[now][0]]) now = son[now][0]; else &#123; x = x - size[son[now][0]] - cnt[now]; now = son[now][1]; &#125; &#125;&#125;inline int pre()&#123; int x = son[rt][0]; while(son[x][1]) x = son[x][1]; return x;&#125;inline int sub()&#123; int x = son[rt][1]; while(son[x][0]) x = son[x][0]; return x;&#125;inline void del(int x)&#123; int nonsense = find(x); if(cnt[rt] &gt; 1)&#123;cnt[rt] --; up(rt); return ;&#125; if(!son[rt][0] &amp;&amp; !son[rt][1]) return ; if(!son[rt][0] || !son[rt][1])&#123; rt = son[rt][0] + son[rt][1]; fa[rt] = 0; return ; &#125; int oldrt = rt, leftbig = pre(); splay(leftbig); fa[son[oldrt][1]] = rt; son[rt][1] = son[oldrt][1]; up(rt);&#125;void init()&#123; n = read(), m = read(); for(int i = 1; i &lt;= n; i ++) a[i] = read(); for(int i = 1; i &lt;= m; i ++) b[i].l = read(), b[i].r = read(), b[i].k = read(), b[i].id = i; sort(b + 1, b + m + 1, cmp); for(int i = 1; i &lt;= m; i ++)&#123; for(int j = b[i - 1].l; j &lt;= min(b[i - 1].r, b[i].l - 1); j ++) del(a[j]); for(int j = max(b[i - 1].r + 1, b[i].l); j &lt;= b[i].r; j ++) ins(a[j]); //for(int j = b[i - 1].l; j &lt;= b[i - 1].r; j ++) del(a[j]); //for(int j = b[i].l; j &lt;= b[i].r; j ++) ins(a[j]); ans[b[i].id] = find_rnk(b[i].k); &#125; for(int i = 1; i &lt;= m; i ++) printf("%d\n", ans[i]);&#125;int main()&#123; init(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>平衡树</tag>
+        <tag>splay</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[莫比乌斯反演学习]]></title>
     <url>%2F2018%2F04%2F02%2F%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94%E5%AD%A6%E4%B9%A0%2F</url>
     <content type="text"><![CDATA[莫比乌斯反演知识点讲解：莫比乌斯反演的概念：如果函数F(x)和f(x)存在关系$F(n)=\sum{d|n}f(d)$，那么就有$f(n)=\sum{d|n}\mu(d)F(\frac{n}{d})$ 还有一种变形形式： 如果函数F(x)和f(x)存在关系$F(n)=\sum{n|d}f(d)$，那么就有$f(n)=\sum{n|d}\mu (\frac{d}{n}) F(d)$ 其中$\mu()$函数是莫比乌斯函数，定义是： 1.如果d=1，$\mu(d)=1$ 2.如果d为互异质数$p_1,p_2,…,p_k$的乘积，则$\mu(d)=(-1)^k$ 3.对于其他所有情况$\mu(d)=0$ 所以我们可以用线性筛的方法求出莫比乌斯函数 莫比乌斯反演的性质：性质一：对于式子$\sum_{d|n} \mu(d)$： 1.如果n=1，那么上述式子的值为1 2.如果n&gt;1，那么上述式子的值为0 性质二：对于任意正整数n均有$\sum_{d|n}\frac{\mu(d)}{d}=\frac{\phi(n)}{n}$ 莫比乌斯反演的证明：这个。。。我貌似只能给出一个比较不严谨，比较简单的证明方法。如果要特别严谨的那种貌似要用卷积（我必须承认我不会那东西。。。） 我们先设$kd’=\frac{n}{d}$，那么$kd=\frac{n}{d’}$，所以$d|\frac{n}{d’}$ \sum_{d|n}\mu(d)F(\frac{n}{d})=\sum_{d|n}\mu(d)\sum_{d'|\frac{n}{d}}f(d')展开，得： \sum_{d|n}\sum_{d'|\frac{n}{d}}\mu(d)f(d')=\sum_{d|\frac{n}{d'}}\sum_{d'|n}f(d')\mu(d)=\sum_{d'|n}f(d')\sum_{d|\frac{n}{d'}}\mu(d)然后这时候我们用一下上面讲到的性质二，就会得到上述式子$=f(n)$ 证毕。 例题：这道例题比较简单，就是一道入门题。 HDU1695：传送门 题意：求对于区间[a，b]内的整数x和[c , d]内的y，满足gcd(x,y)=k的数对的个数。 题解：设$F(t)=满足gcd(x,y)%t==0$的数对个数 $f(t)=满足gcd(x,y)=t$的数对个数，则F(t)和f(t)就存在莫比乌斯反演的关系了。 首先，显然F(t)=(b/t)*(d/t) 其次，因为如果gcd(x,y)=1,则$gcd(x\times k,y\times k)=k$，所以我们把b和d同时除以k，得到的f(1)再去重就是答案。令$lim=min(b/k,d/k)$,而根据上面的莫比乌斯反演第二组定理，$f(1)=\sum_{d}^{lim}\mu(d)\times F(d)$ 代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define lson o &lt;&lt; 1#define rson o &lt;&lt; 1 | 1const int MAXN = 1e5 + 15;int miu[MAXN], prime[MAXN], cnt = 0;bool vis[MAXN]; LL ans1, ans2;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void init()&#123; miu[1] = 1; for(int i = 2; i &lt; 100000; i ++)&#123; if(!vis[i])&#123;prime[++ cnt] = i; miu[i] = -1;&#125; for(int j = 1; j &lt;= cnt; j ++)&#123;if(i * prime[j] &gt; 100000) break; vis[i * prime[j]] = 1; if(i % prime[j]) miu[i * prime[j]] = -miu[i]; else &#123;miu[i * prime[j]] = 0; break;&#125; &#125; &#125;&#125;void work()&#123; int T = read(); init(); int tmp = 0; while(T --)&#123; ++ tmp; int a = read(), b = read(), c = read(), d = read(), k = read(); ans1 = ans2 = 0; if(!k)&#123;printf("Case %d: 0\n", tmp); continue;&#125; b /= k, d /= k; if(b &gt; d) swap(b, d); for(int i = 1; i &lt;= b; i ++) ans1 += (LL)miu[i] * (b / i) * (d / i); for(int i = 1; i &lt;= b; i ++) ans2 += (LL)miu[i] * (b / i) * (b / i); printf("Case %d: %lld\n", tmp, ans1 - ans2 / 2); &#125;&#125;int main()&#123; work(); return 0;&#125;]]></content>
@@ -383,8 +420,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>最近公共祖先</tag>
         <tag>数论</tag>
+        <tag>最近公共祖先</tag>
         <tag>模拟</tag>
         <tag>字符串</tag>
         <tag>动态规划</tag>
@@ -506,8 +543,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>最近公共祖先</tag>
         <tag>线段树</tag>
+        <tag>最近公共祖先</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -1063,8 +1100,8 @@
       <tags>
         <tag>图论</tag>
         <tag>Tarjan</tag>
-        <tag>最短路</tag>
         <tag>数论</tag>
+        <tag>最短路</tag>
         <tag>线段树</tag>
       </tags>
   </entry>
@@ -1091,9 +1128,9 @@
       </categories>
       <tags>
         <tag>图论</tag>
+        <tag>最短路</tag>
         <tag>最小生成树</tag>
         <tag>最近公共祖先</tag>
-        <tag>最短路</tag>
       </tags>
   </entry>
   <entry>
