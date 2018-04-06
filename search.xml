@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[bzoj2286 消耗战 题解]]></title>
+    <url>%2F2018%2F04%2F06%2Fbzoj2286-%E6%B6%88%E8%80%97%E6%88%98-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：在一场战争中，战场由n个岛屿和n-1个桥梁组成，保证每两个岛屿间有且仅有一条路径可达。现在，我军已经侦查到敌军的总部在编号为1的岛屿，而且他们已经没有足够多的能源维系战斗，我军胜利在望。已知在其他k个岛屿上有丰富能源，为了防止敌军获取能源，我军的任务是炸毁一些桥梁，使得敌军不能到达任何能源丰富的岛屿。由于不同桥梁的材质和结构不同，所以炸毁不同的桥梁有不同的代价，我军希望在满足目标的同时使得总代价最小。 侦查部门还发现，敌军有一台神秘机器。即使我军切断所有能源之后，他们也可以用那台机器。机器产生的效果不仅仅会修复所有我军炸毁的桥梁，而且会重新随机资源分布（但可以保证的是，资源不会分布到1号岛屿上）。不过侦查部门还发现了这台机器只能够使用m次，所以我们只需要把每次任务完成即可。 题解：这道题我们考虑树形dp，我们对于每次询问，从关键点中选出最少的点，使得没被选的点都在选的点中的子树内，那么这时候我们就可以把那些被选的点当做叶子结点来dp，$f_i$表示以i为根的子树内，使得敌军不能到达备选的点的最小代价，那么$f_u=min(val[u], \sum f_v)$其中v为u的儿子，val是当前节点到根节点的最小的边的代价。 但是我们对于庞大的询问次数肯定会T，这是我们注意到$\sum k_i&lt;=n$，我们考虑构造虚树，然后再按照上述dp做即可。 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798#include &lt;bits/stdc++.h&gt;#define REP(i, a, b) for(int i = a; i &lt;= b; i ++)#define REPG(i, x) for(int i = head[x]; i; i = g[i].nxt)#define oo 1e60#define clr(x, y) memset(x, y, sizeof(x));using namespace std;typedef long long LL;typedef double LF;LL Max(LL a, LL b)&#123;return a &gt; b ? a : b;&#125;LL Min(LL a, LL b)&#123;return a &lt; b ? a : b;&#125;LL abs(LL x)&#123;return x &gt; 0 ? x : -x;&#125;const int MAXN = 5e5 + 15;struct Edge&#123;int to, nxt, dis;&#125;g1[MAXN &lt;&lt; 1], g2[MAXN &lt;&lt; 1];int n, m, a[MAXN], bin[25], dfn[MAXN], tim = 0, fa[MAXN][25], d[MAXN], sta[MAXN];int head1[MAXN], head2[MAXN], cnt1 = 0, cnt2 = 0, q[MAXN];LL val[MAXN];inline void add(int u, int v, int dis)&#123;g1[++ cnt1] = (Edge)&#123;v, head1[u], dis&#125;; head1[u] = cnt1;&#125;inline void add_edge1(int u, int v, int dis)&#123;if(u == v) return ; add(u, v, dis); add(v, u, dis);&#125;inline void add_edge2(int u, int v, int dis)&#123;if(u == v) return ; g2[++ cnt2] = (Edge)&#123;v, head2[u], dis&#125;; head2[u] = cnt2;&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;bool cmp(int x, int y)&#123;return dfn[x] &lt; dfn[y];&#125;void dfs(int u)&#123; dfn[u] = ++ tim; for(int i = 1; bin[i] &lt;= d[u]; i ++) fa[u][i] = fa[fa[u][i - 1]][i - 1]; for(int i = head1[u]; i; i = g1[i].nxt)&#123; int v = g1[i].to; if(v == fa[u][0]) continue; fa[v][0] = u; d[v] = d[u] + 1; val[v] = min(val[u], 1ll * g1[i].dis); dfs(v); &#125;&#125;int lca(int x, int y)&#123; if(d[x] &lt; d[y]) swap(x, y); int t = d[x] - d[y]; for(int i = 0; bin[i] &lt;= t; i ++) if(t &amp; bin[i]) x = fa[x][i]; for(int i = 17; ~i; i --) if(fa[x][i] != fa[y][i])&#123;x = fa[x][i]; y = fa[y][i];&#125; return (x == y) ? x : fa[x][0];&#125;LL dp(int u)&#123; if(!head2[u]) return val[u]; LL tmp = 0; for(int i = head2[u]; i; i = g2[i].nxt) tmp += dp(g2[i].to); head2[u] = 0; return min(tmp, val[u]);&#125;void solve()&#123; int gg = read(), pt = 1, tp = 1; for(int i = 1; i &lt;= gg; i ++) a[i] = read(); sort(a + 1, a + gg + 1, cmp); for(int i = 2; i &lt;= gg; i ++) if(lca(a[i], a[pt]) != a[pt]) a[++ pt] = a[i]; sta[1] = 1; for(int i = 1; i &lt;= pt; i ++)&#123; int z = lca(a[i], sta[tp]); while(1)&#123; if(d[sta[tp - 1]] &lt;= d[z])&#123; add_edge2(z, sta[tp --], 0); if(sta[tp] != z) sta[++ tp] = z; break; &#125; add_edge2(sta[tp - 1], sta[tp], 0); tp --; &#125; sta[++ tp] = a[i]; &#125; while(tp &gt; 1)&#123;add_edge2(sta[tp - 1], sta[tp], 0); tp --;&#125; printf("%lld\n", dp(1));&#125;void work()&#123; n = read(); bin[0] = 1; for(int i = 1; i &lt;= 18; i ++) bin[i] = bin[i - 1] &lt;&lt; 1; for(int i = 1; i &lt; n; i ++)&#123; int u = read(), v = read(), dis = read(); add_edge1(u, v, dis); &#125; val[1] = oo; dfs(1); m = read(); while(m --) solve(); &#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>虚树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[bzoj3572 世界树 题解]]></title>
+    <url>%2F2018%2F04%2F06%2Fbzoj3572-%E4%B8%96%E7%95%8C%E6%A0%91-%E9%A2%98%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[题意：世界树是一棵无比巨大的树，它伸出的枝干构成了整个世界。在这里，生存着各种各样的种族和生灵，他们共同信奉着绝对公正公平的女神艾莉森，在他们的信条里，公平是使世界树能够生生不息、持续运转的根本基石。世界树的形态可以用一个数学模型来描述：世界树中有n个种族，种族的编号分别从1到n，分别生活在编号为1到n的聚居地上，种族的编号与其聚居地的编号相同。有的聚居地之间有双向的道路相连，道路的长度为1。保证连接的方式会形成一棵树结构，即所有的聚居地之间可以互相到达，并且不会出现环。定义两个聚居地之间的距离为连接他们的道路的长度；例如，若聚居地a和b之间有道路，b和c之间有道路，因为每条道路长度为1而且又不可能出现环，所卧a与c之间的距离为2。出于对公平的考虑，第i年，世界树的国王需要授权m[i]个种族的聚居地为临时议事处。对于某个种族x（x为种族的编号），如果距离该种族最近的临时议事处为y（y为议事处所在聚居地的编号），则种族x将接受y议事处的管辖（如果有多个临时议事处到该聚居地的距离一样，则y为其中编号最小的临时议事处）。现在国王想知道，在q年的时间里，每一年完成授权后，当年每个临时议事处将会管理多少个种族（议事处所在的聚居地也将接受该议事处管理）。 现在这个任务交给了以智慧著称的灵长类的你：程序猿。请帮国王完成这个任务吧。 题解：看到数据范围一定会想到虚树，所以我们先建一棵虚树出来。 然后我们把虚树上的所有点通过该点的子树及祖先们更新出来该点的belong。然后每个虚树上的点记一个rem，表示在原树上其子树内有多少点在虚树的讨论中没有出现过。 这时候我们讨论虚树上的每条边，设离根近的是x，远的是y，这时候我们所讨论到的点其实就是原树上son的子树（son为x的儿子，且son在原树的x到y的路径上）。如果blg[x]=blg[y]的话，那么原树上son的子树刨去y的子树的点一定都belong to blg[x]；如果不相等，我们倍增的找到一个mid，使得这个mid是在原树上的x到y的路径的离根最近的belong to blg[y]的点，那么son的子树刨去mid的子树belong to blg[x]，mid的子树刨去y的子树belong to blg[y]。最后不要忘了rem，即没被讨论过的点。 代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132#include &lt;bits/stdc++.h&gt;#define REP(i, a, b) for(int i = a; i &lt;= b; i ++)#define REPG(i, x) for(int i = head[x]; i; i = g[i].nxt)#define clr(x, y) memset(x, y, sizeof(x));using namespace std;typedef long long LL;typedef double LF;LL Max(LL a, LL b)&#123;return a &gt; b ? a : b;&#125;LL Min(LL a, LL b)&#123;return a &lt; b ? a : b;&#125;LL abs(LL x)&#123;return x &gt; 0 ? x : -x;&#125;const int MAXN = 3e5 + 15;struct Edge&#123;int to, nxt;&#125;g1[MAXN &lt;&lt; 1], g2[MAXN &lt;&lt; 1];int head1[MAXN], head2[MAXN], cnt1 = 0, cnt2 = 0, fa[MAXN][25], bin[25], sta[MAXN], rem[MAXN], c[MAXN], cnt = 0;int d[MAXN], sz[MAXN], dfn[MAXN], tim = 0, a[MAXN], b[MAXN], ans[MAXN], gg = 0, blg[MAXN], n, m, tp;inline void add1(int u, int v)&#123;if(u == v) return ; g1[++ cnt1] = (Edge)&#123;v, head1[u]&#125;; head1[u] = cnt1;&#125;inline void add2(int u, int v)&#123;if(u == v) return ; g2[++ cnt2] = (Edge)&#123;v, head2[u]&#125;; head2[u] = cnt2;&#125;bool cmp(int x, int y)&#123;return dfn[x] &lt; dfn[y];&#125;inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;int lca(int x, int y)&#123; if(d[x] &lt; d[y]) swap(x, y); int t = d[x] - d[y]; for(int i = 0; bin[i] &lt;= t; i ++) if(t &amp; bin[i]) x = fa[x][i]; for(int i = 18; ~i; i --) if(fa[x][i] != fa[y][i]) x = fa[x][i], y = fa[y][i]; return (x == y) ? x : fa[x][0];&#125;inline int getdist(int x, int y)&#123;return d[x] + d[y] - d[lca(x, y)] * 2;&#125;void dfs(int u)&#123; sz[u] = 1; dfn[u] = ++ tim; for(int i = 1; i &lt;= 18; i ++) fa[u][i] = fa[fa[u][i - 1]][i - 1]; for(int i = head1[u]; i; i = g1[i].nxt)&#123; int v = g1[i].to; if(v == fa[u][0]) continue; d[v] = d[u] + 1; fa[v][0] = u; dfs(v); sz[u] += sz[v]; &#125;&#125;void dfs1(int u, int fafa)&#123; rem[u] = sz[u]; c[++ cnt] = u; for(int i = head2[u]; i; i = g2[i].nxt)&#123; int v = g2[i].to; if(v == fafa) continue; dfs1(v, u); if(!blg[v]) continue; if(!blg[u])&#123;blg[u] = blg[v]; continue;&#125; int d1 = getdist(blg[v], u), d2 = getdist(blg[u], u); if(d1 &lt; d2 || (d1 == d2 &amp;&amp; blg[v] &lt; blg[u])) blg[u] = blg[v]; &#125;&#125;void dfs2(int u, int fafa)&#123; for(int i = head2[u]; i; i = g2[i].nxt)&#123; int v = g2[i].to; if(v == fafa) continue; if(!blg[v])&#123;blg[v] = blg[u];&#125; else &#123; int d1 = getdist(blg[v], v), d2 = getdist(blg[u], v); if(d1 &gt; d2 || (d1 == d2 &amp;&amp; blg[v] &gt; blg[u])) blg[v] = blg[u]; &#125; dfs2(v, u); &#125;&#125;void getans(int x, int y)&#123; int son = y, mid = y; int t = d[son] - d[x] - 1; for(int i = 18; ~i; i --) if(t &amp; bin[i]) son = fa[son][i]; rem[x] -= sz[son]; if(blg[x] == blg[y])&#123;ans[blg[x]] += sz[son] - sz[y]; return ;&#125; for(int i = 18; ~i; i --)&#123; int tmp = fa[mid][i]; if(d[tmp] &lt;= d[x]) continue; int d1 = getdist(tmp, blg[x]), d2 = getdist(tmp, blg[y]); if(d1 &gt; d2 || (d1 == d2 &amp;&amp; blg[x] &gt; blg[y])) mid = tmp; &#125; ans[blg[x]] += sz[son] - sz[mid]; ans[blg[y]] += sz[mid] - sz[y];&#125;void solve()&#123;// clear(); gg = read(); for(int i = 1; i &lt;= gg; i ++) b[i] = a[i] = read(), blg[a[i]] = a[i]; sort(a + 1, a + gg + 1, cmp); sta[1] = 1; tp = 1; for(int i = 1; i &lt;= gg; i ++)&#123; if(a[i] == 1) continue; int z = lca(sta[tp], a[i]); while(1)&#123; if(d[sta[tp - 1]] &lt;= d[z])&#123; add2(z, sta[tp]); tp --; if(z != sta[tp]) sta[++ tp] = z; break; &#125; add2(sta[tp - 1], sta[tp]); tp --; &#125; sta[++ tp] = a[i]; &#125; while(tp &gt; 1) add2(sta[tp - 1], sta[tp]), tp --; dfs1(1, 0); dfs2(1, 0); for(int i = 1; i &lt;= cnt; i ++) for(int j = head2[c[i]]; j; j = g2[j].nxt) getans(c[i], g2[j].to); for(int i = 1; i &lt;= cnt; i ++) ans[blg[c[i]]] += rem[c[i]]; for(int i = 1; i &lt;= gg; i ++) printf("%d ", ans[b[i]]); puts(""); for(int i = 1; i &lt;= cnt; i ++) ans[c[i]] = head2[c[i]] = rem[c[i]] = blg[c[i]] = 0; cnt2 = 0; cnt = 0;&#125;void work()&#123; n = read(); bin[0] = 1; for(int i = 1; i &lt;= 19; i ++) bin[i] = bin[i - 1] &lt;&lt; 1; for(int i = 1; i &lt; n; i ++)&#123; int u = read(), v = read(); add1(u, v); add1(v, u); &#125; dfs(1); m = read(); //for(int i = 1; i &lt;= n; i ++) printf("%d ", d[i]); puts(""); while(m --) solve();&#125;int main()&#123; work(); return 0;&#125;]]></content>
+      <categories>
+        <category>知识点</category>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>虚树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[cf518D Ilya and Escalator 题解]]></title>
     <url>%2F2018%2F04%2F03%2Fcf518D-Ilya-and-Escalator-%E9%A2%98%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[题意：有 n 个人排成一列，每秒中队伍最前面的人有 p 的概率走上电梯（一旦走上就不会下电梯），或者有 1 - p 的概率不动。问你 T 秒过后，在电梯上的人的期望。 题解：这道题我们考虑设$f{i,j}$表示前i秒，电梯上有j个人的概率，那么$ans=\sum{0\leq k\leq n}f_{t,k}$ 我们考虑刷表法，对于已知的$f{i,j}$，我们可以给$f{i+1,j}和f{i+1,j+1}$分别加上$(1-p)\times f{i,j}和p\times f_{i,j}$ 代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;typedef double LF;#define clr(x, y) memset(x, y, sizeof(x))const int MAXN = 5e3 + 15;LF f[MAXN][MAXN];inline int read()&#123; int r = 0, z = 1; char ch = getchar(); while(ch &lt; '0' || ch &gt; '9')&#123;if(ch == '-') z = -1; ch = getchar();&#125; while(ch &gt;= '0' &amp;&amp; ch &lt;= '9')&#123;r = r * 10 + ch - '0'; ch = getchar();&#125; return r * z;&#125;void work()&#123; int n = read(); LF p; scanf("%lf", &amp;p); int t = read(); f[0][0] = 1.0; for(int i = 0; i &lt; t; i ++)&#123; f[i + 1][n] += f[i][n]; for(int j = 0; j &lt; n; j ++)&#123; f[i + 1][j + 1] += p * f[i][j]; f[i + 1][j] += (1 - p) * f[i][j]; &#125; &#125; /* for(int i = 1; i &lt;= t; i ++)&#123; for(int j = 0; j &lt;= n; j ++) printf("%.2lf ", f[i][j]); puts(""); &#125; */ LF ans = 0; for(int i = 0; i &lt;= n; i ++) ans += 1.0 * i * f[t][i]; printf("%.6lf\n", ans);&#125;int main()&#123; work(); return 0;&#125;]]></content>
@@ -400,12 +424,12 @@
         <tag>图论</tag>
         <tag>最近公共祖先</tag>
         <tag>模拟</tag>
-        <tag>贪心</tag>
-        <tag>二分答案</tag>
         <tag>字符串</tag>
         <tag>动态规划</tag>
         <tag>枚举</tag>
         <tag>搜索</tag>
+        <tag>贪心</tag>
+        <tag>二分答案</tag>
         <tag>并查集</tag>
         <tag>dfs</tag>
       </tags>
@@ -420,8 +444,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>数论</tag>
         <tag>最近公共祖先</tag>
+        <tag>数论</tag>
         <tag>模拟</tag>
         <tag>字符串</tag>
         <tag>动态规划</tag>
@@ -543,8 +567,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>最近公共祖先</tag>
+        <tag>线段树</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -1099,9 +1123,9 @@
       </categories>
       <tags>
         <tag>图论</tag>
+        <tag>最短路</tag>
         <tag>Tarjan</tag>
         <tag>数论</tag>
-        <tag>最短路</tag>
         <tag>线段树</tag>
       </tags>
   </entry>
@@ -1128,9 +1152,9 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>最短路</tag>
         <tag>最小生成树</tag>
         <tag>最近公共祖先</tag>
+        <tag>最短路</tag>
       </tags>
   </entry>
   <entry>
